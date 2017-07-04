@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
    <children>
       <BorderPane prefHeight="401.0" prefWidth="600.0">
          <center>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox layoutX="23.0" layoutY="23.0" prefHeight="161.0" prefWidth="129.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="22.0" prefWidth="51.0" text="Options">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <CheckBox mnemonicParsing="false" onAction="#toggleItemChecker" text="ItemChecker" />
+                        <CheckBox mnemonicParsing="false" onAction="#toggleFilterUpdate" text="FilterUpdate" />
+                        <CheckBox mnemonicParsing="false" onAction="#toggleItemPricer" text="ItemPricer" />
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" />
+                     </padding>
+                  </VBox>
+               </children></AnchorPane>
          </center>
          <top>
             <MenuBar prefHeight="25.0" prefWidth="600.0" BorderPane.alignment="CENTER">
@@ -21,14 +43,12 @@
                     <MenuItem mnemonicParsing="false" onAction="#onClose" text="Close" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem mnemonicParsing="false" text="GitHub">
+                           <graphic>
+                              <Hyperlink onAction="#linkGithub" />
+                           </graphic></MenuItem>
                   </items>
                 </Menu>
               </menus>
