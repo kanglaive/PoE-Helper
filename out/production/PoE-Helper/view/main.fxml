@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
@@ -17,12 +19,21 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <CheckBox layoutX="39.0" layoutY="45.0" mnemonicParsing="false" text="CheckBox" />
-                  <Label layoutX="55.0" layoutY="14.0" prefHeight="22.0" prefWidth="51.0" text="Options">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
+                  <VBox layoutX="23.0" layoutY="23.0" prefHeight="161.0" prefWidth="129.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="22.0" prefWidth="51.0" text="Options">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <CheckBox mnemonicParsing="false" onAction="#toggleItemChecker" text="ItemChecker" />
+                        <CheckBox mnemonicParsing="false" onAction="#toggleFilterUpdate" text="FilterUpdate" />
+                        <CheckBox mnemonicParsing="false" onAction="#toggleItemPricer" text="ItemPricer" />
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" />
+                     </padding>
+                  </VBox>
                </children></AnchorPane>
          </center>
          <top>
@@ -30,17 +41,29 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" onAction="#onClose" text="Close" />
+                    <MenuItem mnemonicParsing="false" onAction="#onClose" text="Close">
+                           <accelerator>
+                              <KeyCodeCombination alt="DOWN" code="F4" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator></MenuItem>
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
                     <MenuItem mnemonicParsing="false" text="GitHub">
                            <graphic>
-                              <Hyperlink text="GitHub" />
+                              <Hyperlink onAction="#linkGithub" />
                            </graphic></MenuItem>
                   </items>
                 </Menu>
+                  <Menu mnemonicParsing="false">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#itemCheck">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="C" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                    </items>
+                  </Menu>
               </menus>
             </MenuBar>
          </top>
