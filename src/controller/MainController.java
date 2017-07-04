@@ -3,26 +3,28 @@ package controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
+import javafx.stage.Stage;
 import model.Item;
 
 import java.util.prefs.*;
-import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
+
+import org.jnativehook.GlobalScreen;
+import org.jnativehook.NativeHookException;
 
 /**
  * Main Controller class
  * Created by Kang on 7/4/2017.
  */
-public class MainController {
+public class MainController{
+    @FXML private CheckBox itemCheckerCheckBox;
     private boolean itemCheckEnabled = false;
     /**
      * initialize() method called automatically when instantiated
      */
     public void initialize() {
-
 
     }
 
@@ -31,7 +33,8 @@ public class MainController {
      * @param event on close action
      */
     @FXML protected void onClose(ActionEvent event) {
-        Platform.exit();
+        Stage stage = (Stage) itemCheckerCheckBox.getScene().getWindow();
+        stage.close();
     }
 
     @FXML protected void toggleItemChecker(ActionEvent event) {
@@ -50,8 +53,24 @@ public class MainController {
 
     }
 
+    /**
+     * sends application to back of windows
+     * @param event
+     */
+    @FXML protected void sendToBack(ActionEvent event) {
+        Stage stage = (Stage) itemCheckerCheckBox.getScene().getWindow();
+        stage.toBack();
+    }
+
+    /**
+     * checks item in clipboard
+     * @param event
+     * @throws Exception
+     */
     @FXML protected void itemCheck(ActionEvent event) throws Exception {
         String data = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
+        System.out.println(data);
         Item newItem = new Item(data);
     }
+
 }

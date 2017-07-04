@@ -26,7 +26,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <CheckBox mnemonicParsing="false" onAction="#toggleItemChecker" text="ItemChecker" />
+                        <CheckBox fx:id="itemCheckerCheckBox" mnemonicParsing="false" onAction="#toggleItemChecker" text="ItemChecker" />
                         <CheckBox mnemonicParsing="false" onAction="#toggleFilterUpdate" text="FilterUpdate" />
                         <CheckBox mnemonicParsing="false" onAction="#toggleItemPricer" text="ItemPricer" />
                      </children>
@@ -41,6 +41,7 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
+                        <MenuItem fx:id="backMenuItem" mnemonicParsing="false" onAction="#sendToBack" text="Send to Back" />
                     <MenuItem mnemonicParsing="false" onAction="#onClose" text="Close">
                            <accelerator>
                               <KeyCodeCombination alt="DOWN" code="F4" control="UP" meta="UP" shift="UP" shortcut="UP" />
