@@ -8,6 +8,7 @@ public enum Rarity {
     Magic ("Magic"),
     Rare ("Rare"),
     Unique ("Unique"),
+    Gem ("Gem"),
     Currency ("Currency");
 
     private String rarity;
