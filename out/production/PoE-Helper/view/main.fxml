@@ -56,15 +56,6 @@
                            </graphic></MenuItem>
                   </items>
                 </Menu>
-                  <Menu mnemonicParsing="false">
-                    <items>
-                      <MenuItem mnemonicParsing="false" onAction="#itemCheck">
-                           <accelerator>
-                              <KeyCodeCombination alt="UP" code="C" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                           </accelerator>
-                        </MenuItem>
-                    </items>
-                  </Menu>
               </menus>
             </MenuBar>
          </top>

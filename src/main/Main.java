@@ -9,21 +9,30 @@ import javafx.stage.Stage;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.dispatcher.SwingDispatchService;
-import org.jnativehook.keyboard.NativeKeyEvent;
-import org.jnativehook.keyboard.NativeKeyListener;
 
-public class Main extends Application implements NativeKeyListener {
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        // Get the logger for "org.jnativehook" and set the level to warning.
+        Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
+        logger.setLevel(Level.WARNING);
+
+        // Don't forget to disable the parent handlers.
+        logger.setUseParentHandlers(false);
+        // Wrapping access to javafx components using SwingDispatchService.
         GlobalScreen.setEventDispatcher(new SwingDispatchService());
 
-        GlobalScreen.addNativeKeyListener(this);
+        // Instantiate state using main FXML as root
         Parent root = FXMLLoader.load(getClass().getResource("../view/main.fxml"));
         primaryStage.setTitle("PoE Helper");
         primaryStage.setScene(new Scene(root, 600, 450));
         primaryStage.show();
 
+        // register native hook
         try {
             GlobalScreen.registerNativeHook();
         } catch (NativeHookException e) {
@@ -35,40 +44,11 @@ public class Main extends Application implements NativeKeyListener {
     }
 
     /**
-     * overrides jnativehook functions
-     * @param event key is pressed
-     */
-    @Override
-    public void nativeKeyPressed(NativeKeyEvent event) {
-    }
-
-    /**
-     * overrides jnativehook type function
-     * @param event key has been typed
-     */
-    @Override
-    public void nativeKeyTyped(NativeKeyEvent event) {
-    }
-
-    /**
-     * overrides jnativehook key release function
-     * @param event key has depressed
-     */
-    @Override
-    public void nativeKeyReleased(NativeKeyEvent event) {
-        if (event.getKeyCode() == NativeKeyEvent.VC_CONTROL) {
-
-        }
-        if (event.getKeyCode() == NativeKeyEvent.VC_C) {
-
-        }
-    }
-
-    /**
      * overrides application stop function to unhook native key hook before stopping
      */
     @Override
     public void stop() {
+        // unregister native hook before closing
         try {
             GlobalScreen.unregisterNativeHook();
         } catch (NativeHookException e) {
