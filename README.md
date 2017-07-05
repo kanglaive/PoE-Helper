@@ -1,27 +1,11 @@
-# [Start Bootstrap](http://startbootstrap.com/) - [Simple Sidebar](http://startbootstrap.com/template-overviews/simple-sidebar/)
+# [PoE-Helper](https://github.com/kanglaive/PoE-Helper) - [Project Page](https://kanglaive.github.io/PoE-Helper/)
 
-[Simple Sidebar](http://startbootstrap.com/template-overviews/simple-sidebar/) is an off canvas sidebar navigation template for [Bootstrap](http://getbootstrap.com/) created by [Start Bootstrap](http://startbootstrap.com/).
-
-## Getting Started
-
-To begin using this template, choose one of the following options to get started:
-* [Download the latest release on Start Bootstrap](http://startbootstrap.com/template-overviews/simple-sidebar/)
-* Clone the repo: `git clone https://github.com/BlackrockDigital/startbootstrap-simple-sidebar.git`
-* Fork the repo
-
-## Bugs and Issues
-
-Have a bug or an issue with this template? [Open a new issue](https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/issues) here on GitHub or leave a comment on the [template overview page at Start Bootstrap](http://startbootstrap.com/template-overviews/simple-sidebar/).
+This application is meant to be a spiritual successor to the POE-ItemInfo AHK script as well as the POE-TradeMacro AHK script. The core focus of this app is to provide similar aiding features such as item mod checking and item pricing while being built through Java. This project was approached ground-up, and intended to be shared with the PoE dev community, and to provide the groundworks for Java in PoE tool development.
 
 ## Creator
 
-Start Bootstrap was created by and is maintained by **[David Miller](http://davidmiller.io/)**, Owner of [Blackrock Digital](http://blackrockdigital.io/).
-
-* https://twitter.com/davidmillerskt
-* https://github.com/davidtmiller
-
-Start Bootstrap is based on the [Bootstrap](http://getbootstrap.com/) framework created by [Mark Otto](https://twitter.com/mdo) and [Jacob Thorton](https://twitter.com/fat).
+PoE-Helper was created by and is maintained by **[Quang Vo](https://kanglaive.github.io/)**, 
 
 ## Copyright and License
 
-Copyright 2013-2016 Blackrock Digital LLC. Code released under the [MIT](https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/gh-pages/LICENSE) license.
+Copyright (c) 2017 Quang D Vo. Code released under the [MIT](https://github.com/kanglaive/PoE-Helper/blob/master/LICENSE) license.
