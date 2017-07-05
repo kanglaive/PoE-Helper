@@ -3,6 +3,7 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import model.Item;
 import org.jnativehook.GlobalScreen;
@@ -19,6 +20,7 @@ import java.awt.datatransfer.DataFlavor;
  */
 public class MainController  implements NativeKeyListener {
     @FXML private CheckBox itemCheckerCheckBox;
+    @FXML private TextArea itemText;
     private boolean itemPriceEnabled = false;
     private boolean itemCheckEnabled = false;
     private boolean key_ctrl = false;
@@ -90,7 +92,7 @@ public class MainController  implements NativeKeyListener {
     private Item parseClipboard() {
         try {
             String data = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
-            System.out.println(data);
+            itemText.setText(data);
             Item newItem = new Item(data);
             return newItem;
         } catch (Exception e) {

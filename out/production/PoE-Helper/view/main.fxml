@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -33,6 +34,16 @@
                      <padding>
                         <Insets bottom="5.0" />
                      </padding>
+                  </VBox>
+                  <VBox layoutX="152.0" layoutY="23.0" prefHeight="319.0" prefWidth="268.0">
+                     <children>
+                        <Label text="Checking Item">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="itemText" editable="false" prefHeight="200.0" prefWidth="200.0" text="Use Ctrl+C to check item" />
+                     </children>
                   </VBox>
                </children></AnchorPane>
          </center>
