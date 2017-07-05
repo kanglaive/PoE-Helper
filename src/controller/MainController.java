@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -26,6 +28,7 @@ public class MainController  implements NativeKeyListener {
     private boolean key_ctrl = false;
     private boolean key_c = false;
     private boolean key_f = false;
+    
     /**
      * initialize() method called automatically when instantiated
      */
@@ -42,18 +45,32 @@ public class MainController  implements NativeKeyListener {
         stage.close();
     }
 
-    @FXML protected void toggleItemChecker(ActionEvent event) {
-        itemCheckEnabled = !itemCheckEnabled;
+    /**
+     * toggles item check hotkey action
+     * @param event
+     */
+    @FXML protected void toggleItemChecker(ActionEvent event) {itemCheckEnabled = !itemCheckEnabled;
     }
 
+    /**
+     * toggles constant filter updating action
+     * @param event
+     */
     @FXML protected void toggleFilterUpdate(ActionEvent event) {
 
     }
 
-    @FXML protected void toggleItemPricer(ActionEvent event) {
-        itemPriceEnabled = !itemPriceEnabled;
+    /**
+     * toggles item pricing hotkey action
+     * @param event
+     */
+    @FXML protected void toggleItemPricer(ActionEvent event) {itemPriceEnabled = !itemPriceEnabled;
     }
 
+    /**
+     * directs to github project page
+     * @param event
+     */
     @FXML protected void linkGithub(ActionEvent event) {
 
     }
@@ -72,9 +89,6 @@ public class MainController  implements NativeKeyListener {
      */
     private void itemPrice() {
         Item item = parseClipboard();
-        if (item == null) {
-            System.out.println("Error parsing item from clipboard.");
-        }
     }
 
     /**
@@ -84,9 +98,6 @@ public class MainController  implements NativeKeyListener {
      */
     private void itemCheck() {
         Item item = parseClipboard();
-        if (item == null) {
-            System.out.println("Error parsing item from clipboard.");
-        }
     }
 
     private Item parseClipboard() {
@@ -94,7 +105,11 @@ public class MainController  implements NativeKeyListener {
             String data = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
             itemText.setText(data);
             Item newItem = new Item(data);
-            return newItem;
+            if (newItem == null) {
+                System.out.println("Error parsing item from clipboard.");
+            } else {
+                return newItem;
+            }
         } catch (Exception e) {
             System.out.println("Unable to parse string from clipboard.");
             e.printStackTrace();
@@ -129,13 +144,13 @@ public class MainController  implements NativeKeyListener {
 
     /**
      * overrides jnativehook key release function
-     * @param e key has depressed
+     * @param e event where key has depressed
      */
     @Override
     public void nativeKeyReleased(NativeKeyEvent e) {
         // check for hotkey
         if (key_c && key_ctrl && itemCheckEnabled) {
-            itemCheck();
+            parseClipboard();
         }
         if (key_f && key_ctrl && itemPriceEnabled) {
             itemPrice();
