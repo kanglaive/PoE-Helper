@@ -13,8 +13,8 @@ public enum Rarity {
 
     private String rarity;
 
-    Rarity(String rarity) {
-        this.rarity = rarity;
+    Rarity(String rarityRep) {
+        rarity = rarityRep;
     }
 
     @Override
@@ -22,8 +22,8 @@ public enum Rarity {
         return rarity;
     }
 
-    public void setRarity(String rarity) {
-        this.rarity = rarity;
+    public void setRarity(String rarityRep) {
+        rarity = rarityRep;
     }
 
     /**
@@ -33,6 +33,7 @@ public enum Rarity {
      */
     public void parseRarity(String rarity) throws Exception {
         String[] str = rarity.split(" ");
+        System.out.println(str[0] + " and " + str[1]);
         if (str[0].equals("Rarity:")) {
             this.rarity = str[1];
         } else {

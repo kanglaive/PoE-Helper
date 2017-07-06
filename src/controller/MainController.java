@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Item;
 import org.jnativehook.GlobalScreen;
@@ -23,6 +24,12 @@ import java.awt.datatransfer.DataFlavor;
 public class MainController  implements NativeKeyListener {
     @FXML private CheckBox itemCheckerCheckBox;
     @FXML private TextArea itemText;
+    @FXML private TextField rarityField;
+    @FXML private TextField itemNameField;
+    @FXML private TextField baseTypeField;
+    @FXML private TextField line4;
+    @FXML private TextField line5;
+    @FXML private TextField line6;
     private boolean itemPriceEnabled = false;
     private boolean itemCheckEnabled = false;
     private boolean key_ctrl = false;
@@ -98,17 +105,24 @@ public class MainController  implements NativeKeyListener {
      */
     private void itemCheck() {
         Item item = parseClipboard();
+
     }
 
     private Item parseClipboard() {
         try {
             String data = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
+            // debugging
+            Item parsedItem = new Item(data);
             itemText.setText(data);
-            Item newItem = new Item(data);
-            if (newItem == null) {
-                System.out.println("Error parsing item from clipboard.");
-            } else {
-                return newItem;
+            rarityField.setText(parsedItem.getRarity());
+            baseTypeField.setText(parsedItem.getBaseType());
+            itemNameField.setText(parsedItem.getItemName());
+            switch (parsedItem.getRarity()) {
+                case "Currency":
+                    line4.setText(parsedItem.getQuantity());
+                    break;
+                default:
+                    break;
             }
         } catch (Exception e) {
             System.out.println("Unable to parse string from clipboard.");
@@ -150,7 +164,7 @@ public class MainController  implements NativeKeyListener {
     public void nativeKeyReleased(NativeKeyEvent e) {
         // check for hotkey
         if (key_c && key_ctrl && itemCheckEnabled) {
-            parseClipboard();
+            itemCheck();
         }
         if (key_f && key_ctrl && itemPriceEnabled) {
             itemPrice();

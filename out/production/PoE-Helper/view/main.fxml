@@ -8,6 +8,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -42,7 +43,18 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextArea fx:id="itemText" editable="false" prefHeight="200.0" prefWidth="200.0" text="Use Ctrl+C to check item" />
+                        <TextArea fx:id="itemText" editable="false" prefHeight="299.0" prefWidth="268.0" text="Use Ctrl+C to check item" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="436.0" layoutY="42.0" prefHeight="267.0" prefWidth="148.0">
+                     <children>
+                        <TextField fx:id="rarityField" editable="false" prefHeight="25.0" prefWidth="96.0" text="Rarity" />
+                        <TextField fx:id="itemNameField" editable="false" prefHeight="25.0" prefWidth="96.0" text="Item Name" />
+                        <TextField fx:id="baseTypeField" editable="false" prefHeight="25.0" prefWidth="96.0" text="BaseType" />
+                        <TextField fx:id="line4" editable="false" prefHeight="25.0" prefWidth="96.0" text="Armour" />
+                        <TextField fx:id="line5" editable="false" prefHeight="25.0" prefWidth="96.0" text="Evasion" />
+                        <TextField fx:id="line6" editable="false" prefHeight="25.0" prefWidth="96.0" text="Energy Shield" />
+                        <TextField editable="false" prefHeight="25.0" prefWidth="96.0" promptText="Rarity" />
                      </children>
                   </VBox>
                </children></AnchorPane>
