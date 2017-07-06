@@ -55,6 +55,10 @@
                         <TextField fx:id="line5" editable="false" prefHeight="25.0" prefWidth="96.0" text="Evasion" />
                         <TextField fx:id="line6" editable="false" prefHeight="25.0" prefWidth="96.0" text="Energy Shield" />
                         <TextField editable="false" prefHeight="25.0" prefWidth="96.0" promptText="Rarity" />
+                        <TextField editable="false" prefHeight="25.0" prefWidth="96.0" promptText="Rarity" />
+                        <TextField editable="false" prefHeight="25.0" prefWidth="96.0" promptText="Rarity" />
+                        <TextField editable="false" prefHeight="25.0" prefWidth="96.0" promptText="Rarity" />
+                        <TextField editable="false" prefHeight="43.0" prefWidth="148.0" promptText="Rarity" />
                      </children>
                   </VBox>
                </children></AnchorPane>
