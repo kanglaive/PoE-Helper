@@ -3,7 +3,7 @@ package model;
 /**
  * Created by Kang on 7/4/2017.
  */
-public enum BaseType {
+public enum Base {
     BodyArmour ("BodyArmour"),
     Boots ("Boots"),
     Bow ("Bow"),
@@ -21,7 +21,7 @@ public enum BaseType {
 
     private String baseType;
 
-    BaseType(String baseType) {
+    Base(String baseType) {
         this.baseType = baseType;
     }
 

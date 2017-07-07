@@ -76,10 +76,22 @@ public class Item {
                 ilvl = Integer.parseInt(line4[2]);
                 implicit = strArr[5];
                 break;
+            case "Flask":
+                switch (line2[line2.length - 2]) {
+                    case "Life":
+                        break;
+                    case "Mana":
+                        break;
+                    case "Hybrid":
+                        break;
+                }
+
             default:
                 break;
         }
     }
+
+
 
     private void createMagic() {
         itemName = strArr[1];
