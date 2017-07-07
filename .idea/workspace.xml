@@ -2,55 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/basetype/Amulet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/basetype/Belt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/basetype/Bow.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/basetype/DivinationCard.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/basetype/Gem.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/basetype/Jewellery.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/basetype/Quiver.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/basetype/Ring.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/basetype/Shield.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/basetype/Jewellery/Amulet.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/basetype/Jewellery/Belt.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/basetype/Jewellery/Jewellery.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/basetype/Jewellery/Ring.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/basetype/flasks/HybridFlask.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/basetype/flasks/LifeFlask.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/basetype/flasks/ManaFlask.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/basetype/flasks/UtilityFlask.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/basetype/gems/Gem.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/basetype/offhand/quiver.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/basetype/offhand/shield.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/basetype/twohand/Bow.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/PoE-Helper/model/basetype/data/activegems.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/PoE-Helper/model/basetype/data/supportgems.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/basetype/data/activegems.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/basetype/data/supportgems.txt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/MainController.java" afterPath="$PROJECT_DIR$/src/controller/MainController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/Item.java" afterPath="$PROJECT_DIR$/src/model/Item.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/ItemParser.java" afterPath="$PROJECT_DIR$/src/model/ItemParser.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/armor/Armor.java" afterPath="$PROJECT_DIR$/src/model/basetype/Armor.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/armor/BodyArmour.java" afterPath="$PROJECT_DIR$/src/model/basetype/BodyArmour.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/armor/Boots.java" afterPath="$PROJECT_DIR$/src/model/basetype/Boots.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/armor/Gloves.java" afterPath="$PROJECT_DIR$/src/model/basetype/Gloves.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/armor/Helmet.java" afterPath="$PROJECT_DIR$/src/model/basetype/Helmet.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/currency/Currency.java" afterPath="$PROJECT_DIR$/src/model/basetype/Currency.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/flasks/Flask.java" afterPath="$PROJECT_DIR$/src/model/basetype/Flask.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/gems/ActiveSkillGem.java" afterPath="$PROJECT_DIR$/src/model/basetype/ActiveSkillGem.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/gems/SupportSkillGem.java" afterPath="$PROJECT_DIR$/src/model/basetype/SupportSkillGem.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/offhand/OffHand.java" afterPath="$PROJECT_DIR$/src/model/basetype/OffHand.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/onehand/Claw.java" afterPath="$PROJECT_DIR$/src/model/basetype/Claw.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/onehand/Dagger.java" afterPath="$PROJECT_DIR$/src/model/basetype/Dagger.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/onehand/OneHand.java" afterPath="$PROJECT_DIR$/src/model/basetype/OneHand.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/onehand/OneHandAxe.java" afterPath="$PROJECT_DIR$/src/model/basetype/OneHandAxe.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/onehand/OneHandMace.java" afterPath="$PROJECT_DIR$/src/model/basetype/OneHandMace.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/onehand/OneHandSword.java" afterPath="$PROJECT_DIR$/src/model/basetype/OneHandSword.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/onehand/Sceptre.java" afterPath="$PROJECT_DIR$/src/model/basetype/Sceptre.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/onehand/ThrustingOneHandSword.java" afterPath="$PROJECT_DIR$/src/model/basetype/ThrustingOneHandSword.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/onehand/Wand.java" afterPath="$PROJECT_DIR$/src/model/basetype/Wand.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/twohand/Staff.java" afterPath="$PROJECT_DIR$/src/model/basetype/Staff.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/twohand/TwoHand.java" afterPath="$PROJECT_DIR$/src/model/basetype/TwoHand.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/twohand/TwoHandAxe.java" afterPath="$PROJECT_DIR$/src/model/basetype/TwoHandAxe.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/twohand/TwoHandMace.java" afterPath="$PROJECT_DIR$/src/model/basetype/TwoHandMace.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/basetype/twohand/TwoHandSword.java" afterPath="$PROJECT_DIR$/src/model/basetype/TwoHandSword.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/basetype/Flask.java" afterPath="$PROJECT_DIR$/src/model/basetype/Flask.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -113,12 +71,12 @@
       <file leaf-file-name="Flask.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/model/basetype/Flask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
+            <state relative-caret-position="481">
+              <caret line="31" column="29" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#734#735#0" expanded="true" />
-                <element signature="e#776#777#0" expanded="true" />
+                <element signature="e#806#807#0" expanded="true" />
+                <element signature="e#842#843#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -127,7 +85,7 @@
       <file leaf-file-name="Item.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/Item.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="940">
+            <state relative-caret-position="634">
               <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -152,21 +110,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Base.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/Base.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ItemParser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/ItemParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="95" column="17" selection-start-line="95" selection-start-column="17" selection-end-line="95" selection-end-column="17" />
+            <state relative-caret-position="226">
+              <caret line="107" column="21" selection-start-line="107" selection-start-column="21" selection-end-line="107" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#607#615#0" expanded="true" />
@@ -175,10 +123,32 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="MainController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/MainController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1595">
+              <caret line="267" column="26" selection-start-line="267" selection-start-column="26" selection-end-line="267" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AlertController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/AlertController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="21" column="49" selection-start-line="21" selection-start-column="49" selection-end-line="21" selection-end-column="49" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
+            <state relative-caret-position="194">
               <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
               <folding />
             </state>
@@ -961,12 +931,12 @@
       <workItem from="1499373357488" duration="3916000" />
       <workItem from="1499390282793" duration="15619000" />
       <workItem from="1499411349567" duration="2959000" />
-      <workItem from="1499416085041" duration="14796000" />
+      <workItem from="1499416085041" duration="15766000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39396000" />
+    <option name="totallyTimeSpent" value="40366000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="0" width="1928" height="1060" extended-state="1" />
@@ -980,7 +950,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32947367" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32947367" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1278,28 +1248,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/MainController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="267" column="26" selection-start-line="267" selection-start-column="26" selection-end-line="267" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/basetype/ManaFlask.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/AlertController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="21" column="49" selection-start-line="21" selection-start-column="49" selection-end-line="21" selection-end-column="49" />
           <folding />
         </state>
       </provider>
@@ -1410,9 +1362,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/AlertController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="21" column="49" selection-start-line="21" selection-start-column="49" selection-end-line="21" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/MainController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1595">
+          <caret line="267" column="26" selection-start-line="267" selection-start-column="26" selection-end-line="267" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
+        <state relative-caret-position="194">
           <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding />
         </state>
@@ -1420,8 +1390,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/ItemParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="95" column="17" selection-start-line="95" selection-start-column="17" selection-end-line="95" selection-end-column="17" />
+        <state relative-caret-position="226">
+          <caret line="107" column="21" selection-start-line="107" selection-start-column="21" selection-end-line="107" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#607#615#0" expanded="true" />
@@ -1431,7 +1401,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/Item.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="940">
+        <state relative-caret-position="634">
           <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1447,12 +1417,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/basetype/Flask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
+        <state relative-caret-position="481">
+          <caret line="31" column="29" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#734#735#0" expanded="true" />
-            <element signature="e#776#777#0" expanded="true" />
+            <element signature="e#806#807#0" expanded="true" />
+            <element signature="e#842#843#0" expanded="true" />
           </folding>
         </state>
       </provider>

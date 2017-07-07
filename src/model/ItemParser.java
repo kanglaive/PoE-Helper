@@ -32,9 +32,7 @@ public class ItemParser {
     public ItemParser() {
         currentRelativePath = Paths.get("");
         path = currentRelativePath.toAbsolutePath().toString();
-        dataFiles = new File(path).listFiles(new FilenameFilter() {
-            @Override public boolean accept(File dir, String name) { return name.endsWith(".java");
-            } });
+        dataFiles = new File(path + "/src/model/basetype/data").listFiles();
         for (File file : dataFiles) {
             if (file.isFile()) {
                 data.add(file.getName());
@@ -48,7 +46,7 @@ public class ItemParser {
         int i = 0;
         for (String str : data) {
             try(BufferedReader br = new BufferedReader(new FileReader(path + "/src/model/basetype/data/"
-                    + str + ".txt"))) {
+                    + str))) {
                 StringBuilder sb = new StringBuilder();
                 String line = br.readLine();
                 while (line != null) {
@@ -108,7 +106,8 @@ public class ItemParser {
         for (String str : allData) {
             if (str.contains(string)) {
                 try {
-                    Class<?> clazz = Class.forName("model.basetype." + data.get(i));
+                    String[] arr = data.get(i).split("\\.");
+                    Class<?> clazz = Class.forName("model.basetype." + arr[0]);
                     Constructor<?> ctor = clazz.getConstructor(ArrayList.class);
                     item = (Item) ctor.newInstance(new Object[] { strArr });
                 } catch (Exception e) {

@@ -10,6 +10,7 @@ import java.util.logging.Logger;
  * Created by Kang on 7/7/2017.
  */
 public class Flask extends Item {
+    private ArrayList<String> strArr;
     public Flask() {
         this(null);
     }
@@ -19,6 +20,7 @@ public class Flask extends Item {
             Logger logger = Logger.getLogger(getClass().getName());
             logger.log(Level.SEVERE, "Error creating Life Flask from null string array.");
         } else {
+            this.strArr = strArr;
             String[] arr = strArr.get(0).split(" ");
             super.setRarity(arr[1]);
             super.setItemName(strArr.get(1));
@@ -27,6 +29,6 @@ public class Flask extends Item {
     }
 
     public String toString() {
-        return super.getItemName();
+        return strArr.get(7);
     }
 }
