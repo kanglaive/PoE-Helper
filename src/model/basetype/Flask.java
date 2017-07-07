@@ -15,10 +15,14 @@ public class Flask extends Item {
         this(null);
     }
 
+    /**
+     * initiates Flask object from string array
+     * @param strArr arraylist containing parsed item string
+     */
     public Flask(ArrayList<String> strArr) {
         if (strArr == null) {
             Logger logger = Logger.getLogger(getClass().getName());
-            logger.log(Level.SEVERE, "Error creating Life Flask from null string array.");
+            logger.log(Level.SEVERE, "Error creating Flask from null string array.");
         } else {
             this.strArr = strArr;
             String[] arr = strArr.get(0).split(" ");
@@ -28,7 +32,16 @@ public class Flask extends Item {
         }
     }
 
+    @Override
     public String toString() {
-        return strArr.get(7);
+        String rarity = super.getRarity();
+        switch (rarity) {
+            case "Normal":
+                return strArr.get(7) + "\n" + strArr.get(3);
+            case "Magic":
+                return strArr.get(7) + "\n" + strArr.get(3);
+            default:
+                return super.toString();
+        }
     }
 }

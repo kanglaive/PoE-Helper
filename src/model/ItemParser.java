@@ -1,12 +1,10 @@
 package model;
 
 import model.basetype.Currency;
-import model.basetype.Gem;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FilenameFilter;
 import java.lang.reflect.Constructor;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -42,18 +40,26 @@ public class ItemParser {
         populateDatabase();
     }
 
+    /**
+     * initialize database with basetypes
+     */
     private void populateDatabase() {
         int i = 0;
+        // iterate through basetype files
         for (String str : data) {
+            // read each file to string
             try(BufferedReader br = new BufferedReader(new FileReader(path + "/src/model/basetype/data/"
                     + str))) {
+                // build string
                 StringBuilder sb = new StringBuilder();
                 String line = br.readLine();
+                // iterate through file and add line to stringbuilder
                 while (line != null) {
                     sb.append(line);
                     sb.append(System.lineSeparator());
                     line = br.readLine();
                 }
+                // save string to alldata string array
                 allData[i] = sb.toString();
             } catch (Exception e) {
                 Logger logger = Logger.getLogger(getClass().getName());
@@ -63,11 +69,17 @@ public class ItemParser {
         }
     }
 
+    /**
+     * parse item based on item string
+     * @param string string to be parsed by itemparser
+     * @return
+     */
     public Item parseItem(String string) {
         if (string == null) {
             Logger logger = Logger.getLogger(getClass().getName());
             logger.log(Level.SEVERE, "Received null string in Item Parser.");
         } else {
+            // split item string by line
             String[] arr = string.split("\n");
             strArr = new ArrayList<String>(Arrays.asList(arr));
             strArr.remove("--------");
@@ -88,7 +100,7 @@ public class ItemParser {
                         parseBaseType(strArr.get(2));
                         break;
                     case "Gem":
-                        item = new Gem(strArr);
+                        parseBaseType(strArr.get(1));
                     default:
                         break;
                 }
@@ -99,10 +111,11 @@ public class ItemParser {
 
     /**
      * creates object from string and calls respective constructor class
-     * @param string
+     * @param string string to be parsed into respective object
      */
     private void parseBaseType(String string) {
         int i = 0;
+        // iterate through possible basetype strings
         for (String str : allData) {
             if (str.contains(string)) {
                 try {
