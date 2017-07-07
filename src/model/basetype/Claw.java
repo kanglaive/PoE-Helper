@@ -1,7 +1,9 @@
 package model.basetype;
 
+import model.Item;
+
 /**
  * Created by Kang on 7/7/2017.
  */
-public class Claw extends OneHand {
+public class Claw extends Item {
 }

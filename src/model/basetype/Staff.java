@@ -1,7 +1,9 @@
 package model.basetype;
 
+import model.Item;
+
 /**
  * Created by Kang on 7/7/2017.
  */
-public class Staff extends TwoHand {
+public class Staff extends Item {
 }
