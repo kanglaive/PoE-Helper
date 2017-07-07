@@ -2,6 +2,7 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import model.Item;
 
 /**
@@ -20,7 +21,13 @@ public class AlertController {
             itemName.setText(item.getItemName());
             switch (item.getRarity()) {
                 case "Normal":
+                    itemName.setTextFill(Color.rgb(200, 200, 200));
                     break;
+                case "Magic":
+                    itemName.setTextFill(Color.rgb(136, 136, 255));
+                    break;
+                case "Rare":
+                    itemName.setTextFill(Color.rgb(255, 255, 119));
                 default:
                     break;
             }
