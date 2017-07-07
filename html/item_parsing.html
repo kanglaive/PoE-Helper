@@ -70,7 +70,8 @@
                     <div class="col-lg-12">
                         <h1>Item Parsing</h1>
                         <p>While hovering over an item, pressing Ctrl + C in Path of Exile copies said item's properties into the clipboard. The application's item parsing feature is intended to take this string from the clipboard and parse it into a respective Java object. This data is then used to calculate the item's DPS or mods, depending on base type.</p>
-                        <p>Items are initially divided into type of item, such as Currency or Weapon, of which are divided into game dictated BaseTypes. The overarching types are combined into those which will share similar functions, such as Weapons sharing the ability to calculate DPS.</p>
+                        <p>One possible implementation of items is to organize them by base types, in which they share methods depending on shared types. These items are divided into type of item, such as Currency or Weapon, of which are divided into game dictated BaseTypes. The overarching types are combined into those which will share similar functions, such as Weapons sharing the ability to calculate DPS.</p>
+                        <p>Items are currently divided first by Rarity (based on Rarity shown by the Ctrl + C command rather than ingame rarity). These Rarities are Normal, Magic, Rare, Unique, Currency, Gem. </p>
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
                     </div>
                 </div>

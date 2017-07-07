@@ -10,6 +10,12 @@ public class Item {
     private String baseType;
     private String[] strArr;
     private String quantity;
+    private int lvlReq;
+    private int ilvl;
+    private String[] prefix;
+    private String[] suffix;
+    private String implicit;
+    private boolean valid = true;
 
     /** default constructor
      */
@@ -24,16 +30,20 @@ public class Item {
         strArr = string.split("\n");
         // parse rarity on first line
         String[] firstLine = strArr[0].split(" ");
-        System.out.println(strArr[1]);
-        System.out.println(firstLine[1]);
         if (firstLine[0].equals("Rarity:")) {
             itemRarity = firstLine[1];
         }
         switch (firstLine[1]) {
             case "Currency":
-                createCurrency(firstLine[1]);
+                createCurrency();
+                break;
+            case "Normal":
+                createNormal();
+                break;
+            case "Magic":
                 break;
             default:
+                valid = false;
                 break;
         }
     }
@@ -41,18 +51,54 @@ public class Item {
     /**
      * populate item as currency
      */
-    public void createCurrency(String baseType) {
+    public void createCurrency() {
         itemName = strArr[1];
         String[] line4 = strArr[3].split(" ");
         String[] quant = line4[2].split("/");
-        this.baseType = baseType;
+        this.baseType = strArr[1];
         quantity = quant[0];
     }
 
+    /**
+     * populate item as normal item
+     */
+    public void createNormal() {
+        itemName = strArr[1];
+        String[] line2 = strArr[1].split(" ");
+        // get last word in name
+        this.baseType = line2[line2.length - 1];
+        switch(baseType) {
+            case "Amulet":
+            case "Ring":
+            case "Belt":
+                String[] line5 = strArr[4].split(" ");
+                lvlReq = Integer.parseInt(line5[1]);
+                String[] line7 = strArr[6].split(" ");
+                ilvl = Integer.parseInt(line7[2]);
+                implicit = strArr[7];
+                break;
+            case "Sash":
+                String[] line4 = strArr[3].split(" ");
+                ilvl = Integer.parseInt(line4[2]);
+                implicit = strArr[5];
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * returns quantity (only on currency)
+     * @return
+     */
     public String getQuantity() {
         return quantity;
     }
 
+    /**
+     * returns item's base type as given by command
+     * @return base type string
+     */
     public String getBaseType() {
         return baseType;
     }
@@ -72,4 +118,9 @@ public class Item {
     public String getItemName() {
         return itemName;
     }
+
+    public boolean isValid() {
+        return valid;
+    }
+
 }
