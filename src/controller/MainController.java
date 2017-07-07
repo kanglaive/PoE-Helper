@@ -1,19 +1,17 @@
 package controller;
 
+
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Item;
+import model.ItemParser;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
@@ -21,9 +19,10 @@ import org.jnativehook.mouse.NativeMouseEvent;
 import org.jnativehook.mouse.NativeMouseInputListener;
 
 import java.awt.*;
+import java.io.IOException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.prefs.*;
 import java.awt.datatransfer.DataFlavor;
 
 /**
@@ -33,18 +32,15 @@ import java.awt.datatransfer.DataFlavor;
 public class MainController implements NativeKeyListener, NativeMouseInputListener {
     @FXML private CheckBox itemCheckerCheckBox;
     @FXML private TextArea itemText;
-    @FXML private TextField rarityField;
-    @FXML private TextField itemNameField;
-    @FXML private TextField baseTypeField;
-    @FXML private TextField line4;
-    @FXML private TextField line5;
-    @FXML private TextField line6;
     private boolean itemPriceEnabled = false;
     private boolean itemCheckEnabled = false;
     private boolean key_ctrl = false;
     private boolean key_c = false;
     private boolean key_f = false;
+    private boolean alert = false;
     private Stage alertStage;
+    private Stage mainStage;
+    private ItemParser itemParser = new ItemParser();
     
     /**
      * initialize() method called automatically when instantiated
@@ -80,6 +76,14 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
     }
 
     /**
+     * alow changing of hotkeys in menu prompt
+     * @param event
+     */
+    @FXML protected void PromptHotKeyChange(ActionEvent event) {
+
+    }
+
+    /**
      * toggles item pricing hotkey action
      * @param event
      */
@@ -91,7 +95,19 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
      * @param event
      */
     @FXML protected void linkGithub(ActionEvent event) {
+        openWebpage("https://github.com/kanglaive/PoE-Helper");
+    }
 
+    /**
+     * opens webpage through default browser
+     * @param urlString webpage to be opened
+     */
+    public static void openWebpage(String urlString) {
+        try {
+            Desktop.getDesktop().browse(new URL(urlString).toURI());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -129,27 +145,32 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
      * @param item item to display in window
      */
     private void createItemAlert(Item item) {
-        try {
-            Point mousePos = MouseInfo.getPointerInfo().getLocation();
-            FXMLLoader alertLoader = new FXMLLoader();
-            alertLoader.setLocation(getClass().getResource("../view/alert.fxml"));
-            Scene alertScene = new Scene(alertLoader.load(), 320, 240);
-            Platform.runLater(() -> {
-                alertStage = new Stage();
-                alertStage.setScene(alertScene);
-                alertStage.setX(mousePos.x);
-                alertStage.setY(mousePos.y);
-                alertStage.setResizable(false);
-                // using depreciated function to disable focus on item alert window
-                alertStage.setFocused(false);
-                alertStage.initStyle(StageStyle.UNDECORATED);
-                alertStage.show();
-            });
-            AlertController controller = alertLoader.getController();
-            controller.populateAlert(item);
-        } catch (java.io.IOException e) {
-            Logger logger = Logger.getLogger(getClass().getName());
-            logger.log(Level.SEVERE, "Failed to create new window due to missing fxml file.", e);
+        if (alert == false) {
+            alert = true;
+            try {
+                Point mousePos = MouseInfo.getPointerInfo().getLocation();
+                FXMLLoader alertLoader = new FXMLLoader();
+                alertLoader.setLocation(getClass().getResource("../view/alert.fxml"));
+                Scene alertScene = new Scene(alertLoader.load(), 320, 240);
+                Platform.runLater(() -> {
+                    alertStage = new Stage();
+                    alertStage.setScene(alertScene);
+                    alertStage.setX(mousePos.x);
+                    alertStage.setY(mousePos.y);
+                    alertStage.setResizable(false);
+                    // using depreciated function to disable focus on item alert window
+                    alertStage.setFocused(false);
+                    alertStage.initStyle(StageStyle.UNDECORATED);
+                    alertStage.show();
+                });
+                AlertController controller = alertLoader.getController();
+                controller.populateAlert(item);
+            } catch (java.io.IOException e) {
+                Logger logger = Logger.getLogger(getClass().getName());
+                logger.log(Level.SEVERE, "Failed to create new window due to missing fxml file.", e);
+            }
+        } else {
+            alert = false;
         }
     }
 
@@ -168,13 +189,12 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
         if (data == null) {
             return null;
         }
-        Item parsedItem = new Item(data);
-        if (parsedItem.isValid()) {
-            itemText.setText(data);
-            return parsedItem;
-        } else {
-            return null;
-        }
+        Item parsedItem = itemParser.parseItem(data);
+        return parsedItem;
+    }
+
+    public void setStage(Stage mainStage) {
+        this.mainStage = mainStage;
     }
 
     /**
@@ -246,6 +266,7 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
             Platform.runLater(() -> {
                 alertStage.hide();
             });
+            alert = false;
         }
     }
 

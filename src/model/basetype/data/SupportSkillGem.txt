@@ -1,0 +1,107 @@
+Arcane Surge Support
+Onslaught Support
+Ruthless Support
+Brutality Support
+Unbound Ailments Support
+Immolate Support
+Maim Support
+Vile Toxins Support
+Efficacy Support
+Decay Support
+Lesser Reduced Mana Cost Support
+Deadly Ailments Support
+Lesser Poison Support
+Chance to Bleed Support
+Ignite Proliferation Support
+Vaal Soul Harvesting
+Cast while Channelling Support
+Trap Cooldown Support
+Minefield Support
+Elemental Focus Support
+Cluster Traps Support
+Rapid Decay Support
+Controlled Destruction Support
+Void Manipulation Support
+Poison Support
+Trap and Mine Damage Support
+Innervate Support
+Hypothermia Support
+Ice Bite Support
+Fortify Support
+Blasphemy Support
+Physical to Lightning Support
+Generosity Support
+Block Chance Reduction Support
+Enlighten Support
+Physical Projectile Attack Damage Support
+Enhance Support
+Cast when Stunned Support
+Cast when Damage Taken Support
+Cast on Death Support
+Less Duration Support
+Slower Projectiles Support
+Endurance Charge on Melee Stun Support
+Empower Support
+Multiple Traps Support
+Cast on Melee Kill Support
+Cast On Critical Strike Support
+Curse On Hit Support
+Minion and Totem Elemental Resistance Support
+Burning Damage Support
+Power Charge On Critical Support
+Melee Splash Support
+Spell Echo Support
+Multistrike Support
+Return Projectiles Support
+Fork Support
+Split Projectiles Support
+Chain Support
+Lightning Penetration Support
+Cold Penetration Support
+Fire Penetration Support
+Ranged Attack Totem Support
+Blind Support
+Chance to Flee Support
+Remote Mine Support
+Spell Totem Support
+Melee Damage on Full Life Support
+Iron Will Support
+Iron Grip Support
+Point Blank Support
+Culling Strike Support
+WIP Support
+Blood Magic Support
+Elemental Proliferation Support
+Life Gain on Hit Support
+Bloodlust Support
+Elemental Damage with Attacks Support
+Minion Life Support
+Minion Speed Support
+Chance to Ignite Support
+Cold to Fire Support
+Increased Duration Support
+Minion Damage Support
+Concentrated Effect Support
+Faster Casting Support
+Item Rarity Support
+Item Quantity Support
+Melee Physical Damage Support
+Trap Support
+Pierce Support
+Stun Support
+Added Chaos Damage Support
+Mana Leech Support
+Life Leech Support
+Knockback Support
+Increased Critical Damage Support
+Increased Critical Strikes Support
+Reduced Mana Support
+Added Lightning Damage Support
+Increased Area of Effect Support
+Additional Accuracy Support
+Added Cold Damage Support
+Faster Projectiles Support
+Lesser Multiple Projectiles Support
+Greater Multiple Projectiles Support
+Faster Attacks Support
+Added Fire Damage Support

@@ -2,16 +2,20 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="201.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AlertController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="201.0" prefWidth="158.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AlertController">
    <children>
-      <Label fx:id="itemName" layoutX="14.0" layoutY="6.0" prefHeight="17.0" prefWidth="176.0" text="Item Name">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="14.0" layoutY="25.0" prefHeight="19.0" prefWidth="176.0" text="Label" />
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="158.0">
+         <children>
+            <Label fx:id="itemName" prefHeight="17.0" prefWidth="176.0" text="Item Name">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="info" alignment="TOP_LEFT" prefHeight="183.0" prefWidth="158.0" text="item info" wrapText="true" />
+         </children>
+      </VBox>
    </children>
 </Pane>

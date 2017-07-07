@@ -1,0 +1,219 @@
+Skeletal Chains
+Elemental Projectiles
+Scorching Ray
+Ancestral Warchief
+Ancestral Blademaster
+Ancestral Protector
+Vortex
+Frostbolt
+Sunder
+Shadow Blades
+Essence Drain
+Blight
+Wither
+Contagion
+Earthquake
+Righteous Lightning
+Summon Stone Golem
+Orb of Storms
+Frost Bomb
+New Blade Vortex
+Blade Vortex
+Static Tether
+Siege Ballista
+Bladefall
+Blast Rain
+Shrapnel Shot
+Wild Strike
+Ice Trap
+Magma Orb
+Vigilant Strike
+Frost Blades
+Flame Dash
+Detonate Mines
+Abyssal Cry
+Rallying Cry
+Ice Crash
+Summon Lightning Golem
+Summon Flame Golem
+Summon Ice Golem
+Summon Chaos Golem
+Touch of God
+Kinetic Blast
+Blink Arrow
+Mirror Arrow
+Lightning Channel
+Lightning Circle
+Lightning Tendrils
+Poacher's Mark
+Herald of Thunder
+Herald of Ice
+Herald of Ash
+Herald of Blood
+Vaal Lightning Trap
+Tornado Shot
+Fire Nova Mine
+Vaal Flameblast
+...
+Vaal Breach
+Vaal Righteous Fire
+Vaal Sweep
+Vaal FireTrap
+Vaal Haste
+Vaal Discipline
+Vaal Grace
+Vaal Clarity
+Molten Strike
+Vaal Reave
+Vaal Storm Call
+Vaal Summon Skeletons
+Vaal Glacial Hammer
+Vaal Double Strike
+Vaal Heavy Strike
+Vaal Lightning Strike
+Vaal Spectral Throw
+Vaal Cold Snap
+Vaal Rain of Arrows
+Vaal Ground Slam
+Vaal Detonate Dead
+Wand Teleport
+Vaal Ice Nova
+Vaal Cyclone
+Vaal Power Siphon
+Vaal Immortal Call
+Vaal Lightning Warp
+Vaal Molten Shell
+Vaal Burning Arrow
+Vaal Spark
+Vaal Arc
+Vaal Fireball
+Convocation
+Glacial Cascade
+Spirit Offering
+Bone Offering
+Flesh Offering
+Desecrate
+Flame Surge
+Summon Raging Spirit
+Wildfire
+Vortex Mine
+Ball Lightning
+Barrage
+Flameblast
+Storm Call
+Purity of Lightning
+Purity of Ice
+Purity of Fire
+Animate Weapon
+Spectral Throw
+Animate Guardian
+Smoke Mine
+Lightning Trap
+Reave
+Searing Bond
+Cyclone
+Incinerate
+Storm Burst
+Conductivity
+Frostbite
+Flammability
+Flame Totem
+Arctic Armour
+Arctic Armour
+Ethereal Knives
+Devouring Totem
+Decoy Totem
+Fire Trap
+Bear Trap
+Conversion Trap
+Freeze Mine
+Rejuvenation Totem
+Shockwave Totem
+Clarity
+Burning Arrow
+Wrath
+Hatred
+Anger
+Determination
+Grace
+Discipline
+Vitality
+Purity of Elements
+Haste
+Arc
+Lightning Arrow
+Puncture
+Blade Trap
+Power Siphon
+Molten Shell
+Tempest Shield
+Lightning Strike
+Firestorm
+Rain of Arrows
+Dominating Blow
+Heavy Strike
+Reckoning
+Vengeance
+Riposte
+Summon Skeletons Channelled
+Summon Skeletons
+Lightning Warp
+Vulnerability
+Projectile Weakness
+Assassin's Mark
+Enfeeble
+NewPunishment
+Punishment
+Warlord's Mark
+Elemental Weakness
+Temporal Chains
+Explosive Arrow
+Phase Run
+Phase Run
+Viper Strike
+New Shock Nova
+Shock Nova
+Freezing Pulse
+Frost Wall
+Glacial Hammer
+Infernal Blow
+Raise Spectre
+Ice Spear
+Spark
+Flicker Strike
+Backstab
+Riptide
+Portal
+Discharge
+Fire Weapon
+Righteous Fire
+Ignite
+Icefire
+Blood Rage
+Damage Infusion
+Split Arrow
+Static Strike
+Ice Shot
+Arctic Breath
+Caustic Arrow
+Snipe
+Detonate Dead
+Raise Zombie
+Cold Snap
+Frenzy
+Whirling Blades
+Dual Strike
+Immortal Call
+Elemental Hit
+Lacerate
+Double Strike
+Enduring Cry
+Shield Charge
+Cleave
+Ground Slam
+Sweep
+Blade Flurry
+Charged Dash
+Leap Slam
+Ice Nova
+Fireball

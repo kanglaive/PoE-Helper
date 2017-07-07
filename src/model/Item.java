@@ -1,70 +1,45 @@
 package model;
 
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Created by Kang on 7/4/2017.
  */
 public class Item {
-    private String itemRarity;
-    private String itemName;
-    private String baseType;
-    private String[] strArr;
-    private String quantity;
-    private int lvlReq;
-    private int ilvl;
-    private String[] prefix;
-    private String[] suffix;
-    private String implicit;
+    private String itemRarity, itemName, baseType, implicit;
+    private String[] strArr, prefix, suffix;
+    private Rarity rarity;
+    private int lvlReq, ilvl;
     private boolean valid = true;
 
     /** default constructor
      */
-    public Item() {}
-
-    /**
-     * instantiates item
-     * @param string
-     */
-    public Item(String string) {
-        // split item string by lines
-        strArr = string.split("\n");
-        // parse rarity on first line
-        String[] firstLine = strArr[0].split(" ");
-        if (firstLine[0].equals("Rarity:")) {
-            itemRarity = firstLine[1];
-        }
-        switch (firstLine[1]) {
-            case "Currency":
-                createCurrency();
-                break;
-            case "Normal":
-                createNormal();
-                break;
-            case "Magic":
-                break;
-            default:
-                valid = false;
-                break;
-        }
+    public Item() {
+        this(null);
     }
 
-    /**
-     * populate item as currency
-     */
-    public void createCurrency() {
-        itemName = strArr[1];
-        String[] line4 = strArr[3].split(" ");
-        String[] quant = line4[2].split("/");
-        this.baseType = strArr[1];
-        quantity = quant[0];
+    public Item(String rarity) {
+        this.itemRarity = rarity;
+    }
+
+    public Item(String itemName, String rarity, String baseType) {
+        this.itemName = itemName;
+        this.itemRarity = rarity;
+        this.baseType = baseType;
     }
 
     /**
      * populate item as normal item
      */
-    public void createNormal() {
-        itemName = strArr[1];
+    private void createNormal() {
         String[] line2 = strArr[1].split(" ");
+        if (line2[0].equals("Superior")) {
+
+        }
+        itemName = strArr[1];
+
         // get last word in name
         this.baseType = line2[line2.length - 1];
         switch(baseType) {
@@ -82,25 +57,17 @@ public class Item {
                 ilvl = Integer.parseInt(line4[2]);
                 implicit = strArr[5];
                 break;
+            case "Flask":
+
+                break;
             default:
                 break;
         }
     }
 
-    /**
-     * returns quantity (only on currency)
-     * @return
-     */
-    public String getQuantity() {
-        return quantity;
-    }
-
-    /**
-     * returns item's base type as given by command
-     * @return base type string
-     */
-    public String getBaseType() {
-        return baseType;
+    private void createMagic() {
+        itemName = strArr[1];
+        String[] line2 = strArr[1].split(" ");
     }
 
     /**
@@ -119,6 +86,34 @@ public class Item {
         return itemName;
     }
 
+    /**
+            * sets rarity to rarity parameter
+     * @param itemRarity
+     */
+    public void setRarity(String itemRarity) {
+        this.itemRarity = itemRarity;
+    }
+
+    /**
+     * sets itemName to name parameter
+     * @param itemName
+     */
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    /**
+     * sets baseType to base type parameter
+     * @param baseType
+     */
+    public void setBaseType(String baseType) {
+        this.baseType = baseType;
+    }
+
+    /**
+     * returns whether this item is valid
+     * @return
+     */
     public boolean isValid() {
         return valid;
     }
