@@ -1,8 +1,7 @@
 package model;
 
 
-import model.basetype.flasks.Flask;
-import model.basetype.flasks.LifeFlask;
+import model.basetype.flasks.*;
 
 /**
  * Created by Kang on 7/4/2017.
@@ -80,25 +79,16 @@ public class Item {
                 implicit = strArr[5];
                 break;
             case "Flask":
-                switch (line2[line2.length - 2]) {
-                    case "Life":
-                        Flask flask = new LifeFlask();
-                        break;
-                    case "Mana":
-                        break;
-                    case "Hybrid":
-                        break;
-                }
 
+                break;
             default:
                 break;
         }
     }
 
-
-
     private void createMagic() {
         itemName = strArr[1];
+        String[] line2 = strArr[1].split(" ");
     }
 
     /**
@@ -139,6 +129,10 @@ public class Item {
      */
     public boolean isValid() {
         return valid;
+    }
+
+    public String toString() {
+        return strArr[0];
     }
 
 }
