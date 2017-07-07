@@ -20,6 +20,7 @@ import org.jnativehook.mouse.NativeMouseInputListener;
 
 import java.awt.*;
 import java.io.IOException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.datatransfer.DataFlavor;
@@ -97,10 +98,14 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
         openWebpage("https://github.com/kanglaive/PoE-Helper");
     }
 
-    public static void openWebpage(String url) {
+    /**
+     * opens webpage through default browser
+     * @param urlString webpage to be opened
+     */
+    public static void openWebpage(String urlString) {
         try {
-            new ProcessBuilder("x-www-browser", url).start();
-        } catch (IOException e) {
+            Desktop.getDesktop().browse(new URL(urlString).toURI());
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
