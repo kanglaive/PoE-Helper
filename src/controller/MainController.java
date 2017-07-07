@@ -1,5 +1,6 @@
 package controller;
 
+
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -21,6 +22,7 @@ import org.jnativehook.mouse.NativeMouseEvent;
 import org.jnativehook.mouse.NativeMouseInputListener;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.*;
@@ -45,6 +47,7 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
     private boolean key_c = false;
     private boolean key_f = false;
     private Stage alertStage;
+    private Stage mainStage;
     
     /**
      * initialize() method called automatically when instantiated
@@ -80,6 +83,14 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
     }
 
     /**
+     * alow changing of hotkeys in menu prompt
+     * @param event
+     */
+    @FXML protected void PromptHotKeyChange(ActionEvent event) {
+
+    }
+
+    /**
      * toggles item pricing hotkey action
      * @param event
      */
@@ -91,7 +102,15 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
      * @param event
      */
     @FXML protected void linkGithub(ActionEvent event) {
+        openWebpage("https://github.com/kanglaive/PoE-Helper");
+    }
 
+    public static void openWebpage(String url) {
+        try {
+            new ProcessBuilder("x-www-browser", url).start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -175,6 +194,10 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
         } else {
             return null;
         }
+    }
+
+    public void setStage(Stage mainStage) {
+        this.mainStage = mainStage;
     }
 
     /**

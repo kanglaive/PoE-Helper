@@ -14,13 +14,17 @@ public class AlertController {
     /**
      * populates alert with respective item properties
      * @param item
-     * @return
      */
-    public boolean populateAlert(Item item) {
+    public void populateAlert(Item item) {
         if (item.isValid()) {
             itemName.setText(item.getItemName());
+            switch (item.getRarity()) {
+                case "Normal":
+                    break;
+                default:
+                    break;
+            }
         }
-        return false;
     }
 
 }
