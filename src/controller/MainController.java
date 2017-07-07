@@ -40,8 +40,10 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
     private boolean key_ctrl = false;
     private boolean key_c = false;
     private boolean key_f = false;
+    private boolean alert = false;
     private Stage alertStage;
     private Stage mainStage;
+    private ItemParser itemParser = new ItemParser();
     
     /**
      * initialize() method called automatically when instantiated
@@ -142,27 +144,32 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
      * @param item item to display in window
      */
     private void createItemAlert(Item item) {
-        try {
-            Point mousePos = MouseInfo.getPointerInfo().getLocation();
-            FXMLLoader alertLoader = new FXMLLoader();
-            alertLoader.setLocation(getClass().getResource("../view/alert.fxml"));
-            Scene alertScene = new Scene(alertLoader.load(), 320, 240);
-            Platform.runLater(() -> {
-                alertStage = new Stage();
-                alertStage.setScene(alertScene);
-                alertStage.setX(mousePos.x);
-                alertStage.setY(mousePos.y);
-                alertStage.setResizable(false);
-                // using depreciated function to disable focus on item alert window
-                alertStage.setFocused(false);
-                alertStage.initStyle(StageStyle.UNDECORATED);
-                alertStage.show();
-            });
-            AlertController controller = alertLoader.getController();
-            controller.populateAlert(item);
-        } catch (java.io.IOException e) {
-            Logger logger = Logger.getLogger(getClass().getName());
-            logger.log(Level.SEVERE, "Failed to create new window due to missing fxml file.", e);
+        if (alert == false) {
+            alert = true;
+            try {
+                Point mousePos = MouseInfo.getPointerInfo().getLocation();
+                FXMLLoader alertLoader = new FXMLLoader();
+                alertLoader.setLocation(getClass().getResource("../view/alert.fxml"));
+                Scene alertScene = new Scene(alertLoader.load(), 320, 240);
+                Platform.runLater(() -> {
+                    alertStage = new Stage();
+                    alertStage.setScene(alertScene);
+                    alertStage.setX(mousePos.x);
+                    alertStage.setY(mousePos.y);
+                    alertStage.setResizable(false);
+                    // using depreciated function to disable focus on item alert window
+                    alertStage.setFocused(false);
+                    alertStage.initStyle(StageStyle.UNDECORATED);
+                    alertStage.show();
+                });
+                AlertController controller = alertLoader.getController();
+                controller.populateAlert(item);
+            } catch (java.io.IOException e) {
+                Logger logger = Logger.getLogger(getClass().getName());
+                logger.log(Level.SEVERE, "Failed to create new window due to missing fxml file.", e);
+            }
+        } else {
+            alert = false;
         }
     }
 
@@ -181,8 +188,7 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
         if (data == null) {
             return null;
         }
-        ItemParser itemParser = new ItemParser(data);
-        Item parsedItem = itemParser.getItem();
+        Item parsedItem = itemParser.parseItem(data);
         return parsedItem;
     }
 
@@ -259,6 +265,7 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
             Platform.runLater(() -> {
                 alertStage.hide();
             });
+            alert = false;
         }
     }
 

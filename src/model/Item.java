@@ -1,8 +1,6 @@
 package model;
 
 
-import model.basetype.flasks.*;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -88,8 +86,28 @@ public class Item {
         return itemName;
     }
 
+    /**
+            * sets rarity to rarity parameter
+     * @param itemRarity
+     */
     public void setRarity(String itemRarity) {
         this.itemRarity = itemRarity;
+    }
+
+    /**
+     * sets itemName to name parameter
+     * @param itemName
+     */
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    /**
+     * sets baseType to base type parameter
+     * @param baseType
+     */
+    public void setBaseType(String baseType) {
+        this.baseType = baseType;
     }
 
     /**
