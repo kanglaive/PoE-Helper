@@ -14,15 +14,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="line1" prefHeight="19.0" prefWidth="176.0" text="line1" />
-            <Label fx:id="line2" prefHeight="19.0" prefWidth="176.0" text="line2" />
-            <Label fx:id="line3" prefHeight="19.0" prefWidth="176.0" text="line3" />
-            <Label fx:id="line4" prefHeight="19.0" prefWidth="176.0" text="line4" />
-            <Label fx:id="line5" prefHeight="19.0" prefWidth="176.0" text="line5" />
-            <Label fx:id="line6" prefHeight="19.0" prefWidth="176.0" text="line6" />
-            <Label fx:id="line7" prefHeight="19.0" prefWidth="176.0" text="line7" />
-            <Label fx:id="line8" prefHeight="19.0" prefWidth="176.0" text="line8" />
-            <Label fx:id="line9" prefHeight="19.0" prefWidth="176.0" text="line9" />
+            <Label fx:id="info" alignment="TOP_LEFT" prefHeight="183.0" prefWidth="158.0" text="item info" wrapText="true" />
          </children>
       </VBox>
    </children>

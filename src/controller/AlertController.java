@@ -10,6 +10,7 @@ import model.Item;
  */
 public class AlertController {
     @FXML private Label itemName;
+    @FXML private Label info;
 
 
     /**
@@ -28,9 +29,20 @@ public class AlertController {
                     break;
                 case "Rare":
                     itemName.setTextFill(Color.rgb(255, 255, 119));
+                    break;
+                case "Currency":
+                    itemName.setTextFill(Color.rgb(170,158,130));
+                    break;
+                case "Unique":
+                    itemName.setTextFill(Color.rgb(175,96,37));
+                    break;
+                case "Gem":
+                    itemName.setTextFill(Color.rgb(27,162,155));
+                    break;
                 default:
                     break;
             }
+            info.setText(item.toString());
         }
     }
 

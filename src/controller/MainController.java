@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Item;
+import model.ItemParser;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
@@ -25,7 +26,6 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.prefs.*;
 import java.awt.datatransfer.DataFlavor;
 
 /**
@@ -35,12 +35,6 @@ import java.awt.datatransfer.DataFlavor;
 public class MainController implements NativeKeyListener, NativeMouseInputListener {
     @FXML private CheckBox itemCheckerCheckBox;
     @FXML private TextArea itemText;
-    @FXML private TextField rarityField;
-    @FXML private TextField itemNameField;
-    @FXML private TextField baseTypeField;
-    @FXML private TextField line4;
-    @FXML private TextField line5;
-    @FXML private TextField line6;
     private boolean itemPriceEnabled = false;
     private boolean itemCheckEnabled = false;
     private boolean key_ctrl = false;
@@ -187,13 +181,9 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
         if (data == null) {
             return null;
         }
-        Item parsedItem = new Item(data);
-        if (parsedItem.isValid()) {
-            itemText.setText(data);
-            return parsedItem;
-        } else {
-            return null;
-        }
+        ItemParser itemParser = new ItemParser(data);
+        Item parsedItem = itemParser.getItem();
+        return parsedItem;
     }
 
     public void setStage(Stage mainStage) {
