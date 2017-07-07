@@ -50,6 +50,8 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
      */
     public void initialize() {
         GlobalScreen.addNativeKeyListener(this);
+        GlobalScreen.addNativeMouseListener(this);
+        GlobalScreen.addNativeMouseMotionListener(this);
     }
 
     /**
@@ -235,10 +237,15 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
     public void nativeMouseReleased(NativeMouseEvent e) {
     }
 
+    /**
+     * removes item alert on mouse movement
+     * @param e
+     */
     public void nativeMouseMoved(NativeMouseEvent e) {
-        System.out.println(alertStage);
         if (alertStage != null) {
-            alertStage.hide();
+            Platform.runLater(() -> {
+                alertStage.hide();
+            });
         }
     }
 
