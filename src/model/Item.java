@@ -1,6 +1,9 @@
 package model;
 
 
+import model.basetype.flasks.Flask;
+import model.basetype.flasks.LifeFlask;
+
 /**
  * Created by Kang on 7/4/2017.
  */
@@ -79,6 +82,7 @@ public class Item {
             case "Flask":
                 switch (line2[line2.length - 2]) {
                     case "Life":
+                        Flask flask = new LifeFlask();
                         break;
                     case "Mana":
                         break;

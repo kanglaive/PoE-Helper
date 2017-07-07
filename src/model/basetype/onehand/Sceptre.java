@@ -3,5 +3,5 @@ package model.basetype.onehand;
 /**
  * Created by Kang on 7/7/2017.
  */
-public class Sceptre {
+public class Sceptre extends OneHand {
 }
