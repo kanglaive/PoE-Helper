@@ -12,6 +12,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.Item;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.keyboard.NativeKeyEvent;
@@ -116,8 +117,11 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
      */
     private void itemCheck() {
         Item item = parseClipboard();
-        createItemAlert(item);
-
+        if (item == null) {
+            System.err.println("Error parsing item from clipboard.");
+        } else {
+            createItemAlert(item);
+        }
     }
 
     /**
@@ -135,8 +139,14 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
                 alertStage.setScene(alertScene);
                 alertStage.setX(mousePos.x);
                 alertStage.setY(mousePos.y);
+                alertStage.setResizable(false);
+                // using depreciated function to disable focus on item alert window
+                alertStage.setFocused(false);
+                alertStage.initStyle(StageStyle.UNDECORATED);
                 alertStage.show();
             });
+            AlertController controller = alertLoader.getController();
+            controller.populateAlert(item);
         } catch (java.io.IOException e) {
             Logger logger = Logger.getLogger(getClass().getName());
             logger.log(Level.SEVERE, "Failed to create new window due to missing fxml file.", e);
@@ -161,16 +171,6 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
         Item parsedItem = new Item(data);
         if (parsedItem.isValid()) {
             itemText.setText(data);
-            rarityField.setText(parsedItem.getRarity());
-            baseTypeField.setText(parsedItem.getBaseType());
-            itemNameField.setText(parsedItem.getItemName());
-            switch (parsedItem.getRarity()) {
-                case "Currency":
-                    line4.setText(parsedItem.getQuantity());
-                    break;
-                default:
-                    break;
-            }
             return parsedItem;
         } else {
             return null;
