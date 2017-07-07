@@ -1,5 +1,6 @@
 package main;
 
+import controller.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,9 +27,15 @@ public class Main extends Application {
         GlobalScreen.setEventDispatcher(new SwingDispatchService());
 
         // Instantiate state using main FXML as root
-        Parent root = FXMLLoader.load(getClass().getResource("../view/main.fxml"));
+
+        FXMLLoader mainLoader = new FXMLLoader();
+        mainLoader.setLocation(getClass().getResource("../view/main.fxml"));
+        // Parent root = FXMLLoader.load(getClass().getResource("../view/main.fxml"));
+        Scene mainScene = new Scene(mainLoader.load(), 600, 450);
         primaryStage.setTitle("PoE Helper");
-        primaryStage.setScene(new Scene(root, 600, 450));
+        primaryStage.setScene(mainScene);
+        MainController controller = mainLoader.getController();
+        controller.setStage(primaryStage);
         primaryStage.show();
 
         // register native hook

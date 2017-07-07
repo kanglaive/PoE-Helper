@@ -5,16 +5,9 @@ package model;
  * Created by Kang on 7/4/2017.
  */
 public class Item {
-    private String itemRarity;
-    private String itemName;
-    private String baseType;
-    private String[] strArr;
-    private String quantity;
-    private int lvlReq;
-    private int ilvl;
-    private String[] prefix;
-    private String[] suffix;
-    private String implicit;
+    private String itemRarity, itemName, baseType, quantity, implicit;
+    private String[] strArr, prefix, suffix;
+    private int lvlReq, ilvl;
     private boolean valid = true;
 
     /** default constructor
@@ -41,6 +34,7 @@ public class Item {
                 createNormal();
                 break;
             case "Magic":
+                createMagic();
                 break;
             default:
                 valid = false;
@@ -62,7 +56,7 @@ public class Item {
     /**
      * populate item as normal item
      */
-    public void createNormal() {
+    private void createNormal() {
         itemName = strArr[1];
         String[] line2 = strArr[1].split(" ");
         // get last word in name
@@ -85,6 +79,10 @@ public class Item {
             default:
                 break;
         }
+    }
+
+    private void createMagic() {
+        itemName = strArr[1];
     }
 
     /**
@@ -119,6 +117,10 @@ public class Item {
         return itemName;
     }
 
+    /**
+     * returns whether this item is valid
+     * @return
+     */
     public boolean isValid() {
         return valid;
     }
