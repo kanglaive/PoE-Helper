@@ -15,10 +15,14 @@ public class Flask extends Item {
         this(null);
     }
 
+    /**
+     * initiates Flask object from string array
+     * @param strArr arraylist containing parsed item string
+     */
     public Flask(ArrayList<String> strArr) {
         if (strArr == null) {
             Logger logger = Logger.getLogger(getClass().getName());
-            logger.log(Level.SEVERE, "Error creating Life Flask from null string array.");
+            logger.log(Level.SEVERE, "Error creating Flask from null string array.");
         } else {
             this.strArr = strArr;
             String[] arr = strArr.get(0).split(" ");
@@ -28,7 +32,39 @@ public class Flask extends Item {
         }
     }
 
+    @Override
     public String toString() {
-        return strArr.get(7);
+        String rarity = super.getRarity();
+        StringBuilder sb = new StringBuilder();
+        switch (rarity) {
+            case "Normal":
+                parseNormal(sb);
+                break;
+            case "Magic":
+                parseMagic(sb);
+                break;
+            default:
+                break;
+        }
+        if (sb.toString() == null || sb.toString() == "") {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Error creating Flask from null string array.");
+            return "Unable to parse null iitem string.";
+        } else {
+            return sb.toString();
+        }
     }
+
+    private void parseNormal(StringBuilder sb) {
+        sb.append(strArr.get(7));
+        sb.append("\n");
+        sb.append(strArr.get(5) + " " + strArr.get(6));
+    }
+
+    private void parseMagic(StringBuilder sb) {
+        parseNormal(sb);
+    }
+
+
+
 }
