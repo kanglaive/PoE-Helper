@@ -35,13 +35,36 @@ public class Flask extends Item {
     @Override
     public String toString() {
         String rarity = super.getRarity();
+        StringBuilder sb = new StringBuilder();
         switch (rarity) {
             case "Normal":
-                return strArr.get(7) + "\n" + strArr.get(3);
+                parseNormal(sb);
+                break;
             case "Magic":
-                return strArr.get(7) + "\n" + strArr.get(3);
+                parseMagic(sb);
+                break;
             default:
-                return super.toString();
+                break;
+        }
+        if (sb.toString() == null || sb.toString() == "") {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Error creating Flask from null string array.");
+            return "Unable to parse null iitem string.";
+        } else {
+            return sb.toString();
         }
     }
+
+    private void parseNormal(StringBuilder sb) {
+        sb.append(strArr.get(7));
+        sb.append("\n");
+        sb.append(strArr.get(5) + " " + strArr.get(6));
+    }
+
+    private void parseMagic(StringBuilder sb) {
+        parseNormal(sb);
+    }
+
+
+
 }
