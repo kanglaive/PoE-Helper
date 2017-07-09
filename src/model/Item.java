@@ -1,6 +1,8 @@
 package model;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -9,10 +11,12 @@ import java.util.logging.Logger;
  */
 public class Item {
     private String itemRarity, itemName, baseType, implicit;
-    private String[] strArr, prefix, suffix;
+    private String[] prefix, suffix;
     private Rarity rarity;
-    private int lvlReq, ilvl;
+    private int lvlReq, itemLevel = 0, itemReq;
     private boolean valid = true;
+    private ArrayList<String[]> itemBlocks;
+    private HashMap<String, String> itemHashMap;
 
     /** default constructor
      */
@@ -20,54 +24,8 @@ public class Item {
         this(null);
     }
 
-    public Item(String rarity) {
-        this.itemRarity = rarity;
-    }
-
-    public Item(String itemName, String rarity, String baseType) {
-        this.itemName = itemName;
-        this.itemRarity = rarity;
-        this.baseType = baseType;
-    }
-
-    /**
-     * populate item as normal item
-     */
-    private void createNormal() {
-        String[] line2 = strArr[1].split(" ");
-        if (line2[0].equals("Superior")) {
-
-        }
-        itemName = strArr[1];
-
-        // get last word in name
-        this.baseType = line2[line2.length - 1];
-        switch(baseType) {
-            case "Amulet":
-            case "Ring":
-            case "Belt":
-                String[] line5 = strArr[4].split(" ");
-                lvlReq = Integer.parseInt(line5[1]);
-                String[] line7 = strArr[6].split(" ");
-                ilvl = Integer.parseInt(line7[2]);
-                implicit = strArr[7];
-                break;
-            case "Sash":
-                String[] line4 = strArr[3].split(" ");
-                ilvl = Integer.parseInt(line4[2]);
-                implicit = strArr[5];
-                break;
-            case "Flask":
-
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void createMagic() {
-        itemName = strArr[1];
-        String[] line2 = strArr[1].split(" ");
+    public Item(HashMap<String, String> itemHashMap) {
+        this.itemHashMap = itemHashMap;
     }
 
     /**
@@ -111,11 +69,59 @@ public class Item {
     }
 
     /**
+     * sets item req to new item req
+     * @param itemReq new item req
+     */
+    public void setItemReq(int itemReq) {
+        this.itemReq = itemReq;
+    }
+
+    /**
+     * sets item level
+     * @param itemLevel new itemlevel
+     */
+    public void setItemLevel(int itemLevel) {
+        this.itemLevel = itemLevel;
+    }
+
+    /**
+     * returns item's hash map
+     * @return hash map of item
+     */
+    public HashMap<String, String> getHashMap() {
+        return itemHashMap;
+    }
+
+    /**
+     * sets item hash map to new one
+     * @param itemHashMap new item hash map
+     */
+    public void setHashMap(HashMap<String, String> itemHashMap) {
+        this.itemHashMap = itemHashMap;
+    }
+
+    /**
      * returns whether this item is valid
      * @return
      */
     public boolean isValid() {
         return valid;
+    }
+
+    /**
+     * set this itemblocks to new item blocks
+     * @param itemBlocks
+     */
+    public void setItemBlocks(ArrayList<String[]> itemBlocks) {
+        this.itemBlocks = itemBlocks;
+    }
+
+    /**
+     * returns itemblocks data from item
+     * @return itemblocks item's itemblocks data struct
+     */
+    public ArrayList<String[]> getItemBlocks() {
+        return itemBlocks;
     }
 
 }
