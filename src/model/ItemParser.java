@@ -129,6 +129,10 @@ public class ItemParser {
         }
     }
 
+    /**
+     * parses requirements block and adds data to item hash map
+     * @param block requirements block to be parsed
+     */
     private void parseRequirementsBlock(String[] block) {
         for (String blockLine : block) {
             String[] parsedLine = blockLine.split(" ");
