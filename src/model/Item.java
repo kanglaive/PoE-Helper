@@ -2,6 +2,7 @@ package model;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -10,11 +11,12 @@ import java.util.logging.Logger;
  */
 public class Item {
     private String itemRarity, itemName, baseType, implicit;
-    private String[] strArr, prefix, suffix;
+    private String[] prefix, suffix;
     private Rarity rarity;
     private int lvlReq, itemLevel = 0, itemReq;
     private boolean valid = true;
     private ArrayList<String[]> itemBlocks;
+    private HashMap<String, String> itemHashMap;
 
     /** default constructor
      */
@@ -24,46 +26,6 @@ public class Item {
 
     public Item(ArrayList<String[]> itemBlocks) {
         this.itemBlocks = itemBlocks;
-    }
-
-    /**
-     * populate item as normal item
-     */
-    private void createNormal() {
-        String[] line2 = strArr[1].split(" ");
-        if (line2[0].equals("Superior")) {
-
-        }
-        itemName = strArr[1];
-
-        // get last word in name
-        this.baseType = line2[line2.length - 1];
-        switch(baseType) {
-            case "Amulet":
-            case "Ring":
-            case "Belt":
-                String[] line5 = strArr[4].split(" ");
-                lvlReq = Integer.parseInt(line5[1]);
-                String[] line7 = strArr[6].split(" ");
-                itemLevel = Integer.parseInt(line7[2]);
-                implicit = strArr[7];
-                break;
-            case "Sash":
-                String[] line4 = strArr[3].split(" ");
-                itemLevel = Integer.parseInt(line4[2]);
-                implicit = strArr[5];
-                break;
-            case "Flask":
-
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void createMagic() {
-        itemName = strArr[1];
-        String[] line2 = strArr[1].split(" ");
     }
 
     /**
@@ -120,6 +82,22 @@ public class Item {
      */
     public void setItemLevel(int itemLevel) {
         this.itemLevel = itemLevel;
+    }
+
+    /**
+     * returns item's hash map
+     * @return hash map of item
+     */
+    public HashMap<String, String> getHashMap() {
+        return itemHashMap;
+    }
+
+    /**
+     * sets item hash map to new one
+     * @param itemHashMap new item hash map
+     */
+    public void setHashMap(HashMap<String, String> itemHashMap) {
+        this.itemHashMap = itemHashMap;
     }
 
     /**

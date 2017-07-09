@@ -1,6 +1,8 @@
 package model;
 
 
+import model.basetype.Flask;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -16,14 +18,17 @@ import java.util.ArrayList;
  */
 public class ItemParser {
     private Path currentRelativePath;
+    private ArrayList<String[]> itemBlocks;
     private String path;
     private File[] dataFiles;
     private ArrayList<String> data = new ArrayList<String>();
     private String[] allData;
+    private Item item;
     /**
      * item parser constructor with empty item
      */
     public ItemParser() {
+        // get current path
         currentRelativePath = Paths.get("");
         path = currentRelativePath.toAbsolutePath().toString();
         dataFiles = new File(path + "/src/model/basetype/data").listFiles();
@@ -68,7 +73,7 @@ public class ItemParser {
     /**
      * parse item based on item string
      * @param string string to be parsed by itemparser
-     * @return
+     * @return item to be returned
      */
     public Item pushString(String string) {
         if (string == null) {
@@ -79,7 +84,7 @@ public class ItemParser {
             // split item into blocks
             String[] blocks = string.split("--------");
             // initiate item as arraylist of block arrs
-            ArrayList<String[]> itemBlocks = new ArrayList<>();
+            itemBlocks = new ArrayList<>();
             // iterate through blocks
             for (String block : blocks) {
                 // split blocks by line
@@ -87,56 +92,89 @@ public class ItemParser {
                 // add line to itemLines
                 itemBlocks.add(blockLines);
             }
-            return parseItem(new Item(itemBlocks));
+            return parseItem();
         }
     }
 
     /**
      * parses item and populates into item
-     * @param item item to parse data into
      * @return Item now parsed item
      */
-    private Item parseItem(Item item) {
+    private Item parseItem() {
         // initial vars
-        ArrayList<String[]> itemBlocks = item.getItemBlocks();
-        String tempStr;
-        String[] tempSplit;
+        item = new Item(itemBlocks);
         // iterate through item's blocks
-        for (int i = 0; i < itemBlocks.size(); i++) {
-            String[] block = itemBlocks.get(i);
-            // rarity test
-            tempStr = block[0];
-            tempSplit = tempStr.split(" ");
-            // choose methods based on first word
-            switch (tempSplit[0]) {
-                case "Rarity":
-                    item.setRarity(tempSplit[1]);
-                    break;
-                case "Requirements:":
-                    tempSplit = block[1].split(" ");
-                    item.setItemReq(Integer.parseInt(tempSplit[1]));
-                    break;
-                case "Item Level:":
-                    item.setItemLevel(Integer.parseInt(tempSplit[1]));
-                default:
-                    break;
-            }
-        }
+        itemBlocks.forEach(this::parseBlock);
         return item;
     }
 
+    /**
+     * parses a block of item data
+     * @param block item data block separated by "--------" lines
+     */
+    private void parseBlock(String[] block) {
+        // get first line of block
+        String tempStr = block[0];
+        String[] lineSplit = tempStr.split(" ");
+        // choose first word for tag to parse
+        switch (lineSplit[0]) {
+            case "Rarity":
+                String[] parsedRarityBlock = parseRarityBlock(block);
+                item = createBaseItem(parsedRarityBlock);
+                try {
+                    item.setRarity(lineSplit[1]);
+                } catch (NullPointerException e) {
+                    Logger logger = Logger.getLogger(getClass().getName());
+                    logger.log(Level.SEVERE, "ItemParser cannot find item rarity despite finding rarity tag.", e);
+                }
+            case "Requirements:":
 
+            case "Item Level:":
+                try {
+                    item.setItemLevel(Integer.parseInt(lineSplit[1]));
+                } catch (NullPointerException e) {
+                    Logger logger = Logger.getLogger(getClass().getName());
+                    logger.log(Level.SEVERE, "ItemParser cannot find item lvl despite finding ilvl tag.", e);
+                }
+            default:
+                break;
+        }
+    }
 
     /**
-     * creates object from string and calls respective constructor class
-     * @param string object base name
-     * @param itemBlocks item blocks struct
+     * parses rarity block
+     * @param block block containing item rarity
+     * @return item rarity
      */
-    private Item createBaseItem(String string, ArrayList<String[]> itemBlocks) {
+    private String[] parseRarityBlock(String[] block) {
+        String firstLine = block[0];
+        String[] firstLineSplit = firstLine.split(" ");
+        String[] parsedBlock = new String[2];
+        parsedBlock[0] = firstLineSplit[1];
+        switch (firstLineSplit[1]) {
+            case "Normal":
+            case "Magic":
+            case "Currency":
+            case "Gem":
+                parsedBlock[1] = block[1];
+            case "Rare":
+            case "Unique":
+                parsedBlock[1] = block[2];
+            default:
+                break;
+        }
+        return parsedBlock;
+    }
+
+    /**
+     * creates class from string, populating it with global item blocks
+     * @param parsedRarityBlock [rarity, itemName] rarity block result
+     */
+    private Item createBaseItem(String[] parsedRarityBlock) {
         int i = 0;
         // iterate through possible basetype strings
         for (String str : allData) {
-            if (str.contains(string)) {
+            if (str.contains(parsedRarityBlock[1])) {
                 try {
                     String[] arr = data.get(i).split("\\.");
                     Class<?> clazz = Class.forName("model.basetype." + arr[0]);
