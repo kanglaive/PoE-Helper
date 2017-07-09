@@ -24,8 +24,8 @@ public class Item {
         this(null);
     }
 
-    public Item(ArrayList<String[]> itemBlocks) {
-        this.itemBlocks = itemBlocks;
+    public Item(HashMap<String, String> itemHashMap) {
+        this.itemHashMap = itemHashMap;
     }
 
     /**

@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.lang.reflect.Constructor;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
@@ -21,9 +22,9 @@ public class ItemParser {
     private ArrayList<String[]> itemBlocks;
     private String path;
     private File[] dataFiles;
-    private ArrayList<String> data = new ArrayList<String>();
+    private ArrayList<String> data = new ArrayList<>();
     private String[] allData;
-    private Item item;
+    private HashMap<String, String> hashMap = new HashMap<>();
     /**
      * item parser constructor with empty item
      */
@@ -101,10 +102,9 @@ public class ItemParser {
      * @return Item now parsed item
      */
     private Item parseItem() {
-        // initial vars
-        item = new Item(itemBlocks);
         // iterate through item's blocks
         itemBlocks.forEach(this::parseBlock);
+        Item item = createBaseItem(hashMap.get("ItemName"));
         return item;
     }
 
@@ -119,67 +119,114 @@ public class ItemParser {
         // choose first word for tag to parse
         switch (lineSplit[0]) {
             case "Rarity":
-                String[] parsedRarityBlock = parseRarityBlock(block);
-                item = createBaseItem(parsedRarityBlock);
-                try {
-                    item.setRarity(lineSplit[1]);
-                } catch (NullPointerException e) {
-                    Logger logger = Logger.getLogger(getClass().getName());
-                    logger.log(Level.SEVERE, "ItemParser cannot find item rarity despite finding rarity tag.", e);
-                }
+                parseRarityBlock(block);
             case "Requirements:":
-
+                parseRequirementsBlock(block);
             case "Item Level:":
-                try {
-                    item.setItemLevel(Integer.parseInt(lineSplit[1]));
-                } catch (NullPointerException e) {
-                    Logger logger = Logger.getLogger(getClass().getName());
-                    logger.log(Level.SEVERE, "ItemParser cannot find item lvl despite finding ilvl tag.", e);
-                }
+                hashMap.put("ItemLevel", lineSplit[1]);
             default:
                 break;
         }
+    }
+
+    private void parseRequirementsBlock(String[] block) {
+        for (String blockLine : block) {
+            String[] parsedLine = blockLine.split(" ");
+            switch(parsedLine[0]) {
+                case "Level:":
+                    hashMap.put("LevelReq",parsedLine[1]);
+                    break;
+                case "Str":
+                    hashMap.put("StrReq",parsedLine[1]);
+                    break;
+                case "Int":
+                    hashMap.put("IntReq",parsedLine[1]);
+                    break;
+                case "Dex:":
+                    hashMap.put("DexReq",parsedLine[1]);
+                    break;
+                default:
+                    break;
+            }
+        }
+        /*
+        Alternative requirements parsing
+        for (String blockLine : block) {
+            String[] parsedLine = blockLine.split(" ");
+            hashMap.put(parsedLine[0], parsedLine[1]);
+        */
     }
 
     /**
      * parses rarity block
      * @param block block containing item rarity
-     * @return item rarity
      */
-    private String[] parseRarityBlock(String[] block) {
+    private void parseRarityBlock(String[] block) {
         String firstLine = block[0];
+        String itemName;
         String[] firstLineSplit = firstLine.split(" ");
-        String[] parsedBlock = new String[2];
-        parsedBlock[0] = firstLineSplit[1];
+        String rarity = firstLineSplit[1];
+        hashMap.put("Rarity", rarity);
         switch (firstLineSplit[1]) {
             case "Normal":
-            case "Magic":
             case "Currency":
             case "Gem":
-                parsedBlock[1] = block[1];
+                itemName = block[1];
+            case "Magic":
+                itemName = parseMagicName(block[1]);
             case "Rare":
             case "Unique":
-                parsedBlock[1] = block[2];
+                itemName = block[2];
             default:
+                itemName = null;
                 break;
         }
-        return parsedBlock;
+        hashMap.put("ItemName", itemName);
+    }
+
+    /**
+     * find base type name in magic item name
+     * @param itemName entire magic item name
+     * @return base type of magic item
+     */
+    private String parseMagicName(String itemName) {
+        // return null if empty item name
+        if (itemName == null || itemName.equals("")) {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Error parsing magic item name.");
+            return null;
+        } else {
+            // iterate through base types
+            for (String type : allData) {
+                String[] splitStr = type.split("\n");
+                for (String base : splitStr) {
+                    // if magic item name contains base type
+                    if (itemName.contains(base)) {
+                        return base;
+                    }
+                }
+            }
+            // return null if unable to be found
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Cannot find base in magic item name");
+            return null;
+        }
     }
 
     /**
      * creates class from string, populating it with global item blocks
-     * @param parsedRarityBlock [rarity, itemName] rarity block result
+     * @param itemName itemName to search for
      */
-    private Item createBaseItem(String[] parsedRarityBlock) {
+    private Item createBaseItem(String itemName) {
         int i = 0;
         // iterate through possible basetype strings
         for (String str : allData) {
-            if (str.contains(parsedRarityBlock[1])) {
+            if (str.contains(itemName)) {
                 try {
                     String[] arr = data.get(i).split("\\.");
                     Class<?> clazz = Class.forName("model.basetype." + arr[0]);
                     Constructor<?> ctor = clazz.getConstructor(ArrayList.class);
-                    return (Item) ctor.newInstance(new Object[] {itemBlocks});
+                    return (Item) ctor.newInstance(new Object[] {hashMap});
                 } catch (Exception e) {
                     Logger logger = Logger.getLogger(getClass().getName());
                     logger.log(Level.SEVERE, "Error creating Java Object from string.", e);
