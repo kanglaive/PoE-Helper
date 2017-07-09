@@ -102,15 +102,24 @@ public class ItemParser {
         String tempStr;
         String[] tempSplit;
         // iterate through item's blocks
-        for (String[] block : itemBlocks) {
+        for (int i = 0; i < itemBlocks.size(); i++) {
+            String[] block = itemBlocks.get(i);
             // rarity test
             tempStr = block[0];
             tempSplit = tempStr.split(" ");
-            if (tempSplit[0].equals("Rarity:")) {
-                item.setRarity(tempSplit[1]);
-            } else if (tempSplit[0].equals("Requirements:")) {
-                tempSplit = block[1].split(" ");
-                item.setItemReq(Integer.parseInt(tempSplit[1]));
+            // choose methods based on first word
+            switch (tempSplit[0]) {
+                case "Rarity":
+                    item.setRarity(tempSplit[1]);
+                    break;
+                case "Requirements:":
+                    tempSplit = block[1].split(" ");
+                    item.setItemReq(Integer.parseInt(tempSplit[1]));
+                    break;
+                case "Item Level:":
+                    item.setItemLevel(Integer.parseInt(tempSplit[1]));
+                default:
+                    break;
             }
         }
         return item;

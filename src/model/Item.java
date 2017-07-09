@@ -12,7 +12,7 @@ public class Item {
     private String itemRarity, itemName, baseType, implicit;
     private String[] strArr, prefix, suffix;
     private Rarity rarity;
-    private int lvlReq, ilvl, itemReq;
+    private int lvlReq, itemLevel = 0, itemReq;
     private boolean valid = true;
     private ArrayList<String[]> itemBlocks;
 
@@ -45,12 +45,12 @@ public class Item {
                 String[] line5 = strArr[4].split(" ");
                 lvlReq = Integer.parseInt(line5[1]);
                 String[] line7 = strArr[6].split(" ");
-                ilvl = Integer.parseInt(line7[2]);
+                itemLevel = Integer.parseInt(line7[2]);
                 implicit = strArr[7];
                 break;
             case "Sash":
                 String[] line4 = strArr[3].split(" ");
-                ilvl = Integer.parseInt(line4[2]);
+                itemLevel = Integer.parseInt(line4[2]);
                 implicit = strArr[5];
                 break;
             case "Flask":
@@ -110,7 +110,17 @@ public class Item {
      * sets item req to new item req
      * @param itemReq new item req
      */
-    public void setItemReq(int itemReq) { this.itemReq = itemReq; }
+    public void setItemReq(int itemReq) {
+        this.itemReq = itemReq;
+    }
+
+    /**
+     * sets item level
+     * @param itemLevel new itemlevel
+     */
+    public void setItemLevel(int itemLevel) {
+        this.itemLevel = itemLevel;
+    }
 
     /**
      * returns whether this item is valid

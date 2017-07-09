@@ -15,7 +15,7 @@ public class Currency extends Item {
     }
 
     public Currency(ArrayList<String> strArr) {
-        super(strArr.get(1), "Currency", "Currency");
+        super();
         populateItem(strArr);
     }
 
