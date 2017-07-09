@@ -188,9 +188,10 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
         }
         if (data == null) {
             return null;
+        } else {
+            return itemParser.pushString(data);
         }
-        Item parsedItem = itemParser.parseItem(data);
-        return parsedItem;
+
     }
 
     public void setStage(Stage mainStage) {

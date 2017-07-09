@@ -1,6 +1,5 @@
 package model;
 
-import model.basetype.Currency;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,7 +7,6 @@ import java.io.FileReader;
 import java.lang.reflect.Constructor;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
@@ -22,11 +20,9 @@ public class ItemParser {
     private File[] dataFiles;
     private ArrayList<String> data = new ArrayList<String>();
     private String[] allData;
-
-    private ArrayList<String> strArr;
-    private Item item;
-
-
+    /**
+     * item parser constructor with empty item
+     */
     public ItemParser() {
         currentRelativePath = Paths.get("");
         path = currentRelativePath.toAbsolutePath().toString();
@@ -74,46 +70,60 @@ public class ItemParser {
      * @param string string to be parsed by itemparser
      * @return
      */
-    public Item parseItem(String string) {
+    public Item pushString(String string) {
         if (string == null) {
             Logger logger = Logger.getLogger(getClass().getName());
             logger.log(Level.SEVERE, "Received null string in Item Parser.");
+            return null;
         } else {
-            // split item string by line
-            String[] arr = string.split("\n");
-            strArr = new ArrayList<String>(Arrays.asList(arr));
-            strArr.remove("--------");
-            arr = strArr.get(0).split(" ");
-            // checks for "rarity:" substring to validate
-            if (arr[0].equals("Rarity:")) {
-                item = new Item(arr[1]);
-                switch (arr[1]) {
-                    case "Currency":
-                        item = new Currency(strArr);
-                        break;
-                    case "Normal":
-                    case "Magic":
-                        parseBaseType(strArr.get(1));
-                        break;
-                    case "Rare":
-                    case "Unique":
-                        parseBaseType(strArr.get(2));
-                        break;
-                    case "Gem":
-                        parseBaseType(strArr.get(1));
-                    default:
-                        break;
-                }
+            // split item into blocks
+            String[] blocks = string.split("--------");
+            // initiate item as arraylist of block arrs
+            ArrayList<String[]> itemBlocks = new ArrayList<>();
+            // iterate through blocks
+            for (String block : blocks) {
+                // split blocks by line
+                String[] blockLines = block.split("\n");
+                // add line to itemLines
+                itemBlocks.add(blockLines);
+            }
+            return parseItem(new Item(itemBlocks));
+        }
+    }
+
+    /**
+     * parses item and populates into item
+     * @param item item to parse data into
+     * @return Item now parsed item
+     */
+    private Item parseItem(Item item) {
+        // initial vars
+        ArrayList<String[]> itemBlocks = item.getItemBlocks();
+        String tempStr;
+        String[] tempSplit;
+        // iterate through item's blocks
+        for (String[] block : itemBlocks) {
+            // rarity test
+            tempStr = block[0];
+            tempSplit = tempStr.split(" ");
+            if (tempSplit[0].equals("Rarity:")) {
+                item.setRarity(tempSplit[1]);
+            } else if (tempSplit[0].equals("Requirements:")) {
+                tempSplit = block[1].split(" ");
+                item.setItemReq(Integer.parseInt(tempSplit[1]));
             }
         }
         return item;
     }
 
+
+
     /**
      * creates object from string and calls respective constructor class
-     * @param string string to be parsed into respective object
+     * @param string object base name
+     * @param itemBlocks item blocks struct
      */
-    private void parseBaseType(String string) {
+    private Item createBaseItem(String string, ArrayList<String[]> itemBlocks) {
         int i = 0;
         // iterate through possible basetype strings
         for (String str : allData) {
@@ -122,7 +132,7 @@ public class ItemParser {
                     String[] arr = data.get(i).split("\\.");
                     Class<?> clazz = Class.forName("model.basetype." + arr[0]);
                     Constructor<?> ctor = clazz.getConstructor(ArrayList.class);
-                    item = (Item) ctor.newInstance(new Object[] { strArr });
+                    return (Item) ctor.newInstance(new Object[] {itemBlocks});
                 } catch (Exception e) {
                     Logger logger = Logger.getLogger(getClass().getName());
                     logger.log(Level.SEVERE, "Error creating Java Object from string.", e);
@@ -131,5 +141,6 @@ public class ItemParser {
             }
             i++;
         }
+        return null;
     }
 }

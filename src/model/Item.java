@@ -1,6 +1,7 @@
 package model;
 
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,8 +12,9 @@ public class Item {
     private String itemRarity, itemName, baseType, implicit;
     private String[] strArr, prefix, suffix;
     private Rarity rarity;
-    private int lvlReq, ilvl;
+    private int lvlReq, ilvl, itemReq;
     private boolean valid = true;
+    private ArrayList<String[]> itemBlocks;
 
     /** default constructor
      */
@@ -20,14 +22,8 @@ public class Item {
         this(null);
     }
 
-    public Item(String rarity) {
-        this.itemRarity = rarity;
-    }
-
-    public Item(String itemName, String rarity, String baseType) {
-        this.itemName = itemName;
-        this.itemRarity = rarity;
-        this.baseType = baseType;
+    public Item(ArrayList<String[]> itemBlocks) {
+        this.itemBlocks = itemBlocks;
     }
 
     /**
@@ -111,11 +107,33 @@ public class Item {
     }
 
     /**
+     * sets item req to new item req
+     * @param itemReq new item req
+     */
+    public void setItemReq(int itemReq) { this.itemReq = itemReq; }
+
+    /**
      * returns whether this item is valid
      * @return
      */
     public boolean isValid() {
         return valid;
+    }
+
+    /**
+     * set this itemblocks to new item blocks
+     * @param itemBlocks
+     */
+    public void setItemBlocks(ArrayList<String[]> itemBlocks) {
+        this.itemBlocks = itemBlocks;
+    }
+
+    /**
+     * returns itemblocks data from item
+     * @return itemblocks item's itemblocks data struct
+     */
+    public ArrayList<String[]> getItemBlocks() {
+        return itemBlocks;
     }
 
 }
