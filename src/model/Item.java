@@ -16,7 +16,7 @@ public class Item {
     private int lvlReq, itemLevel = 0, itemReq;
     private boolean valid = true;
     private ArrayList<String[]> itemBlocks;
-    private HashMap<String, String> itemHashMap;
+    private HashMap<String, String> itemMap;
 
     /** default constructor
      */
@@ -24,8 +24,15 @@ public class Item {
         this(null);
     }
 
-    public Item(HashMap<String, String> itemHashMap) {
-        this.itemHashMap = itemHashMap;
+    public Item(HashMap<String, String> itemMap) {
+       if (itemMap == null) {
+           Logger logger = Logger.getLogger(getClass().getName());
+           logger.log(Level.WARNING, "Created item with empty itemMap.");
+       } else {
+           this.itemMap = itemMap;
+           setRarity(itemMap.get("Rarity"));
+           setItemName(itemMap.get("ItemName"));
+       }
     }
 
     /**
@@ -33,7 +40,7 @@ public class Item {
      * @return rarity parsed as string
      */
     public String getRarity() {
-        return itemRarity;
+        return itemMap.get("Rarity");
     }
 
     /**
@@ -89,7 +96,7 @@ public class Item {
      * @return hash map of item
      */
     public HashMap<String, String> getHashMap() {
-        return itemHashMap;
+        return itemMap;
     }
 
     /**
@@ -97,7 +104,7 @@ public class Item {
      * @param itemHashMap new item hash map
      */
     public void setHashMap(HashMap<String, String> itemHashMap) {
-        this.itemHashMap = itemHashMap;
+        this.itemMap = itemHashMap;
     }
 
     /**

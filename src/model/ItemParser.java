@@ -10,6 +10,7 @@ import java.lang.reflect.Constructor;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
@@ -19,12 +20,11 @@ import java.util.ArrayList;
  */
 public class ItemParser {
     private Path currentRelativePath;
-    private ArrayList<String[]> itemBlocks;
     private String path;
     private File[] dataFiles;
-    private ArrayList<String> data = new ArrayList<>();
+    private ArrayList<String> baseTypes = new ArrayList<>();
     private String[] allData;
-    private HashMap<String, String> hashMap = new HashMap<>();
+    private HashMap<String, String> hashMap;
     /**
      * item parser constructor with empty item
      */
@@ -32,13 +32,16 @@ public class ItemParser {
         // get current path
         currentRelativePath = Paths.get("");
         path = currentRelativePath.toAbsolutePath().toString();
+        // get directory or basetype txt files
         dataFiles = new File(path + "/src/model/basetype/data").listFiles();
+        // iterate through txt file and add base type names to arr
         for (File file : dataFiles) {
             if (file.isFile()) {
-                data.add(file.getName());
+                baseTypes.add(file.getName());
             }
         }
-        allData = new String[data.size()];
+        // create data struct holding all base types
+        allData = new String[baseTypes.size()];
         populateDatabase();
     }
 
@@ -48,7 +51,7 @@ public class ItemParser {
     private void populateDatabase() {
         int i = 0;
         // iterate through basetype files
-        for (String str : data) {
+        for (String str : baseTypes) {
             // read each file to string
             try(BufferedReader br = new BufferedReader(new FileReader(path + "/src/model/basetype/data/"
                     + str))) {
@@ -73,27 +76,27 @@ public class ItemParser {
 
     /**
      * parse item based on item string
-     * @param string string to be parsed by itemparser
-     * @return item to be returned
+     * @param itemString string to be parsed by itemparser
+     * @return initially parsed item
      */
-    public Item pushString(String string) {
-        if (string == null) {
+    public Item parseItemString(String itemString) {
+        if (itemString == null) {
             Logger logger = Logger.getLogger(getClass().getName());
             logger.log(Level.SEVERE, "Received null string in Item Parser.");
             return null;
         } else {
             // split item into blocks
-            String[] blocks = string.split("--------");
+            String[] blockStrings = itemString.split("--------");
             // initiate item as arraylist of block arrs
-            itemBlocks = new ArrayList<>();
+            ArrayList<String[]> itemBlocks = new ArrayList<>();
             // iterate through blocks
-            for (String block : blocks) {
+            for (String block : blockStrings) {
                 // split blocks by line
                 String[] blockLines = block.split("\n");
                 // add line to itemLines
                 itemBlocks.add(blockLines);
             }
-            return parseItem();
+            return parseItemBlocks(itemBlocks);
         }
     }
 
@@ -101,11 +104,14 @@ public class ItemParser {
      * parses item and populates into item
      * @return Item now parsed item
      */
-    private Item parseItem() {
+    private Item parseItemBlocks(ArrayList<String[]> itemBlocks) {
+        hashMap = new HashMap<>();
         // iterate through item's blocks
-        itemBlocks.forEach(this::parseBlock);
-        Item item = createBaseItem(hashMap.get("ItemName"));
-        return item;
+        for (String[] block : itemBlocks) {
+            parseBlock(block);
+        }
+        String itemName = hashMap.get("ItemName");
+        return createBaseItem(itemName);
     }
 
     /**
@@ -118,15 +124,57 @@ public class ItemParser {
         String[] lineSplit = tempStr.split(" ");
         // choose first word for tag to parse
         switch (lineSplit[0]) {
-            case "Rarity":
+            case "Rarity:":
                 parseRarityBlock(block);
             case "Requirements:":
                 parseRequirementsBlock(block);
+            case "Stack":
+                parseQuantityBlock(block);
             case "Item Level:":
                 hashMap.put("ItemLevel", lineSplit[1]);
             default:
                 break;
         }
+    }
+
+    /**
+     * parses rarity block
+     * @param block block containing item rarity
+     */
+    private void parseRarityBlock(String[] block) {
+        String firstLine = block[0];
+        String itemName = null;
+        String[] firstLineSplit = firstLine.split(" ");
+        String rarity = firstLineSplit[1];
+        hashMap.put("Rarity", rarity);
+        // find item name
+        switch (firstLineSplit[1]) {
+            case "Normal":
+            case "Currency":
+            case "Gem":
+                itemName = block[1];
+                break;
+            case "Magic":
+                itemName = parseMagicName(block[1]);
+                break;
+            case "Rare":
+            case "Unique":
+                itemName = block[2];
+                break;
+            default:
+                break;
+        }
+        // add item name to hash map
+        hashMap.put("ItemName", itemName);
+    }
+
+    /**
+     * parses quantity block for currency items
+     * @param block quantity block string array to be parsed
+     */
+    private void parseQuantityBlock(String[] block) {
+        String[] lineSplit = block[0].split(" ");
+        hashMap.put("Quantity",lineSplit[lineSplit.length - 1]);
     }
 
     /**
@@ -159,33 +207,6 @@ public class ItemParser {
             String[] parsedLine = blockLine.split(" ");
             hashMap.put(parsedLine[0], parsedLine[1]);
         */
-    }
-
-    /**
-     * parses rarity block
-     * @param block block containing item rarity
-     */
-    private void parseRarityBlock(String[] block) {
-        String firstLine = block[0];
-        String itemName;
-        String[] firstLineSplit = firstLine.split(" ");
-        String rarity = firstLineSplit[1];
-        hashMap.put("Rarity", rarity);
-        switch (firstLineSplit[1]) {
-            case "Normal":
-            case "Currency":
-            case "Gem":
-                itemName = block[1];
-            case "Magic":
-                itemName = parseMagicName(block[1]);
-            case "Rare":
-            case "Unique":
-                itemName = block[2];
-            default:
-                itemName = null;
-                break;
-        }
-        hashMap.put("ItemName", itemName);
     }
 
     /**
@@ -227,18 +248,19 @@ public class ItemParser {
         for (String str : allData) {
             if (str.contains(itemName)) {
                 try {
-                    String[] arr = data.get(i).split("\\.");
+                    String[] arr = baseTypes.get(i).split("\\.");
                     Class<?> clazz = Class.forName("model.basetype." + arr[0]);
-                    Constructor<?> ctor = clazz.getConstructor(ArrayList.class);
+                    Constructor<?> ctor = clazz.getConstructor(HashMap.class);
                     return (Item) ctor.newInstance(new Object[] {hashMap});
                 } catch (Exception e) {
                     Logger logger = Logger.getLogger(getClass().getName());
-                    logger.log(Level.SEVERE, "Error creating Java Object from string.", e);
+                    logger.log(Level.SEVERE, "Error creating new Java Object from string.", e);
                 }
                 break;
             }
             i++;
         }
+        // should never return null Item
         return null;
     }
 }

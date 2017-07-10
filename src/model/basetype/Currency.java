@@ -3,6 +3,7 @@ package model.basetype;
 import model.Item;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Kang on 7/7/2017.
@@ -14,20 +15,13 @@ public class Currency extends Item {
         this(null);
     }
 
-    public Currency(ArrayList<String> strArr) {
+    public Currency(HashMap<String, String> itemMap) {
         super();
-        populateItem(strArr);
+        populateItem(itemMap);
     }
 
-    public void populateItem(String[] strArr) {
-        String[] line4 = strArr[3].split(" ");
-        String[] quant = line4[2].split("/");
-        quantity = line4[2];
-    }
-
-    public void populateItem(ArrayList<String> strArr) {
-        String[] arr = strArr.get(2).split(" ");
-        quantity = arr[2];
+    private void populateItem(HashMap<String, String> itemMap) {
+        quantity = itemMap.get("Quantity");
     }
 
     public String toString() {
