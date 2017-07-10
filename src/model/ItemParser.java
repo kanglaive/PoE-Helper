@@ -21,6 +21,7 @@ public class ItemParser {
     private ArrayList<String> baseTypes = new ArrayList<>();
     private String[] baseTypeDatabase;
     private HashMap<String, String> hashMap;
+    public static String newLine = System.getProperty("line.separator");
     /**
      * item parser constructor with empty item
      */
@@ -49,8 +50,7 @@ public class ItemParser {
         // iterate through basetype files
         for (String str : baseTypes) {
             // read each file to string
-            try(BufferedReader br = new BufferedReader(new FileReader(path + "/src/model/basetype/data/"
-                    + str))) {
+            try (BufferedReader br = new BufferedReader(new FileReader(path + "/src/model/basetype/data/" + str))) {
                 // build string
                 StringBuilder sb = new StringBuilder();
                 String line = br.readLine();
@@ -82,24 +82,24 @@ public class ItemParser {
         for (String[] block : itemBlocks) {
             parseBlock(block);
         }
-        String baseType = hashMap.get("BaseType");
         String rarity = hashMap.get("Rarity");
-        if (rarity.equals("Currency") || rarity.equals("Gem")) {
-            return createBaseItem(rarity);
-        } else {
-            return createBaseItem(baseType);
-        }
+        return createBaseItem(hashMap.get("BaseType"));
     }
 
+    /**
+     * parses item string to item blocks
+     * @param itemString item string data
+     * @return arraylist of item block string arrays
+     */
     public ArrayList<String[]> parseStringToBlocks(String itemString) {
         // split item into blocks
-        String[] blockStrings = itemString.split("--------");
+        String[] blockStrings = itemString.split("--------" + newLine);
         // initiate item as arraylist of block arrs
         ArrayList<String[]> itemBlocks = new ArrayList<>();
         // iterate through blocks
         for (String block : blockStrings) {
             // split blocks by line
-            String[] blockLines = block.split("\n");
+            String[] blockLines = block.split(newLine);
             // add line to itemLines
             itemBlocks.add(blockLines);
         }
@@ -119,17 +119,19 @@ public class ItemParser {
             case "Rarity:":
                 String[] rarityData = parseRarityBlock(block);
                 hashMap.put("Rarity", rarityData[0]);
-                if (rarityData[0].equals("Currency") || rarityData[0].equals("Gem")) {
-                    hashMap.put("itemName", rarityData[1]);
-                } else {
-                    hashMap.put("BaseType", rarityData[1]);
-                }
+                hashMap.put("ItemName", rarityData[1]);
+                hashMap.put("BaseType", rarityData[2]);
+                break;
             case "Requirements:":
                 parseRequirementsBlock(block);
+                break;
             case "Stack":
-                parseQuantityBlock(block);
+                String quantity = parseQuantityBlock(block);
+                hashMap.put("Quantity", quantity);
+                break;
             case "Item Level:":
                 hashMap.put("ItemLevel", lineSplit[1]);
+                break;
             default:
                 break;
         }
@@ -138,10 +140,10 @@ public class ItemParser {
     /**
      * parses rarity block
      * @param block block containing item rarity
-     * @return rarity and item name from first block
+     * @return rarity, itemName, basetype
      */
     public String[] parseRarityBlock(String[] block) {
-        String[] results = new String[2];
+        String[] results = new String[3];
         String firstLine = block[0];
         String[] firstLineSplit = firstLine.split(" ");
         results[0] = firstLineSplit[1];
@@ -151,13 +153,16 @@ public class ItemParser {
             case "Currency":
             case "Gem":
                 results[1] = block[1];
+                results[2] = block[1];
                 break;
             case "Magic":
                 results[1] = parseMagicName(block[1]);
+                results[2] = block[1];
                 break;
             case "Rare":
             case "Unique":
-                results[1] = block[2];
+                results[1] = block[1];
+                results[2] = block[2];
                 break;
             default:
                 break;
@@ -170,9 +175,10 @@ public class ItemParser {
      * parses quantity block for currency items
      * @param block quantity block string array to be parsed
      */
-    public void parseQuantityBlock(String[] block) {
+    public String parseQuantityBlock(String[] block) {
         String[] lineSplit = block[0].split(" ");
-        hashMap.put("Quantity",lineSplit[lineSplit.length - 1]);
+        String quantity = lineSplit[lineSplit.length - 1];
+        return quantity;
     }
 
     /**
@@ -221,7 +227,7 @@ public class ItemParser {
         } else {
             // iterate through base types
             for (String type : baseTypeDatabase) {
-                String[] splitStr = type.split("\n");
+                String[] splitStr = type.split(newLine);
                 for (String base : splitStr) {
                     // if magic item name contains base type
                     if (itemName.contains(base)) {
@@ -241,31 +247,37 @@ public class ItemParser {
      * @param itemName itemName to search for
      */
     public Item createBaseItem(String itemName) {
-        int i = 0;
-        // iterate through possible basetype strings
-        for (String str : baseTypeDatabase) {
-            if (str.contains(itemName)) {
-                try {
-                    String[] arr = baseTypes.get(i).split("\\.");
-                    String className = "model.basetype." + arr[0];
-                    Class myClass = Class.forName(className);
-                    Class[] types = {HashMap.class};
-                    Constructor constructor = myClass.getConstructor(types);
-                    Object[] parameters = {hashMap};
-                    Item item = (Item)constructor.newInstance(parameters);
-                    return item;
-                } catch (Exception e) {
-                    Logger logger = Logger.getLogger(getClass().getName());
-                    logger.log(Level.SEVERE, "Error creating new Java Object from string.", e);
+        if (itemName == null) {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Attempted to create item from empty item name string.");
+            return null;
+        } else {
+            int i = 0;
+            // iterate through possible basetype strings
+            for (String str : baseTypeDatabase) {
+                if (str.contains(itemName)) {
+                    try {
+                        String[] arr = baseTypes.get(i).split("\\.");
+                        String className = "model.basetype." + arr[0];
+                        Class myClass = Class.forName(className);
+                        Class[] types = {HashMap.class};
+                        Constructor constructor = myClass.getConstructor(types);
+                        Object[] parameters = {hashMap};
+                        Item item = (Item)constructor.newInstance(parameters);
+                        return item;
+                    } catch (Exception e) {
+                        Logger logger = Logger.getLogger(getClass().getName());
+                        logger.log(Level.SEVERE, "Error creating new Java Object from string.", e);
+                    }
+                    break;
                 }
-                break;
+                i++;
             }
-            i++;
+            // should never return null Item
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Cannot find base item in base item database.");
+            return null;
         }
-        // should never return null Item
-        Logger logger = Logger.getLogger(getClass().getName());
-        logger.log(Level.SEVERE, "Cannot find base item in base item database.");
-        return null;
     }
 
     /**

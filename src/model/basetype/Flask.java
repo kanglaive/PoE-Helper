@@ -3,6 +3,7 @@ package model.basetype;
 import model.Item;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,23 +12,27 @@ import java.util.logging.Logger;
  */
 public class Flask extends Item {
     private ArrayList<String> strArr;
+    private HashMap<String, String> itemMap;
+
+    /**
+     * Flask constructor
+     */
     public Flask() {
         this(null);
     }
 
     /**
      * initiates Flask object from string array
-     * @param strArr arraylist containing parsed item string
+     * @param itemMap hash map of item properties
      */
-    public Flask(ArrayList<String> strArr) {
-        if (strArr == null) {
+    public Flask(HashMap<String, String> itemMap) {
+        if (itemMap == null) {
             Logger logger = Logger.getLogger(getClass().getName());
-            logger.log(Level.SEVERE, "Error creating Flask from null string array.");
+            logger.log(Level.SEVERE, "Error creating Flask from null hash map.");
         } else {
-            this.strArr = strArr;
-            String[] arr = strArr.get(0).split(" ");
-            super.setRarity(arr[1]);
-            super.setItemName(strArr.get(1));
+            this.itemMap = itemMap;
+            super.setRarity(itemMap.get("Rarity"));
+            super.setItemName(itemMap.get("ItemName"));
             super.setBaseType("Flask");
         }
     }
@@ -54,6 +59,7 @@ public class Flask extends Item {
             return sb.toString();
         }
     }
+
 
     private void parseNormal(StringBuilder sb) {
         sb.append(strArr.get(7));
