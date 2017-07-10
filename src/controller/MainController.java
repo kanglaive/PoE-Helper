@@ -134,7 +134,7 @@ public class MainController implements NativeKeyListener, NativeMouseInputListen
     private void itemCheck() {
         Item item = parseClipboard();
         if (item == null) {
-            System.err.println("Error parsing item from clipboard.");
+            System.err.println("Attempted to parse an invalid item from clipboard.");
         } else {
             createItemAlert(item);
         }

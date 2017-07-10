@@ -274,7 +274,7 @@ public class ItemParser {
             }
             // should never return null Item
             Logger logger = Logger.getLogger(getClass().getName());
-            logger.log(Level.SEVERE, "Cannot find base item in base item database.");
+            logger.log(Level.SEVERE, "Cannot find " + itemName + " in base item database.");
             return null;
         }
     }
