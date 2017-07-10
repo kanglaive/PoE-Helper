@@ -1,8 +1,6 @@
 package model;
 
 
-import model.basetype.Flask;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -10,7 +8,6 @@ import java.lang.reflect.Constructor;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
@@ -23,7 +20,7 @@ public class ItemParser {
     private String path;
     private File[] dataFiles;
     private ArrayList<String> baseTypes = new ArrayList<>();
-    private String[] allData;
+    private String[] baseTypeDatabase;
     private HashMap<String, String> hashMap;
     /**
      * item parser constructor with empty item
@@ -41,7 +38,7 @@ public class ItemParser {
             }
         }
         // create data struct holding all base types
-        allData = new String[baseTypes.size()];
+        baseTypeDatabase = new String[baseTypes.size()];
         populateDatabase();
     }
 
@@ -65,7 +62,7 @@ public class ItemParser {
                     line = br.readLine();
                 }
                 // save string to alldata string array
-                allData[i] = sb.toString();
+                baseTypeDatabase[i] = sb.toString();
             } catch (Exception e) {
                 Logger logger = Logger.getLogger(getClass().getName());
                 logger.log(Level.SEVERE, "Error populating base type database for item parsing.", e);
@@ -104,7 +101,7 @@ public class ItemParser {
      * parses item and populates into item
      * @return Item now parsed item
      */
-    private Item parseItemBlocks(ArrayList<String[]> itemBlocks) {
+    public Item parseItemBlocks(ArrayList<String[]> itemBlocks) {
         hashMap = new HashMap<>();
         // iterate through item's blocks
         for (String[] block : itemBlocks) {
@@ -118,14 +115,16 @@ public class ItemParser {
      * parses a block of item data
      * @param block item data block separated by "--------" lines
      */
-    private void parseBlock(String[] block) {
+    public void parseBlock(String[] block) {
         // get first line of block
         String tempStr = block[0];
         String[] lineSplit = tempStr.split(" ");
         // choose first word for tag to parse
         switch (lineSplit[0]) {
             case "Rarity:":
-                parseRarityBlock(block);
+                String[] rarityData = parseRarityBlock(block);
+                hashMap.put("Rarity", rarityData[0]);
+                hashMap.put("ItemName", rarityData[1]);
             case "Requirements:":
                 parseRequirementsBlock(block);
             case "Stack":
@@ -140,39 +139,40 @@ public class ItemParser {
     /**
      * parses rarity block
      * @param block block containing item rarity
+     * @return rarity and item name from first block
      */
-    private void parseRarityBlock(String[] block) {
+    public String[] parseRarityBlock(String[] block) {
+        String[] results = new String[2];
         String firstLine = block[0];
         String itemName = null;
         String[] firstLineSplit = firstLine.split(" ");
-        String rarity = firstLineSplit[1];
-        hashMap.put("Rarity", rarity);
+        results[0] = firstLineSplit[1];
         // find item name
         switch (firstLineSplit[1]) {
             case "Normal":
             case "Currency":
             case "Gem":
-                itemName = block[1];
+                results[1] = block[1];
                 break;
             case "Magic":
-                itemName = parseMagicName(block[1]);
+                results[1] = parseMagicName(block[1]);
                 break;
             case "Rare":
             case "Unique":
-                itemName = block[2];
+                results[1] = block[2];
                 break;
             default:
                 break;
         }
         // add item name to hash map
-        hashMap.put("ItemName", itemName);
+        return results;
     }
 
     /**
      * parses quantity block for currency items
      * @param block quantity block string array to be parsed
      */
-    private void parseQuantityBlock(String[] block) {
+    public void parseQuantityBlock(String[] block) {
         String[] lineSplit = block[0].split(" ");
         hashMap.put("Quantity",lineSplit[lineSplit.length - 1]);
     }
@@ -181,7 +181,7 @@ public class ItemParser {
      * parses requirements block and adds data to item hash map
      * @param block requirements block to be parsed
      */
-    private void parseRequirementsBlock(String[] block) {
+    public void parseRequirementsBlock(String[] block) {
         for (String blockLine : block) {
             String[] parsedLine = blockLine.split(" ");
             switch(parsedLine[0]) {
@@ -214,7 +214,7 @@ public class ItemParser {
      * @param itemName entire magic item name
      * @return base type of magic item
      */
-    private String parseMagicName(String itemName) {
+    public String parseMagicName(String itemName) {
         // return null if empty item name
         if (itemName == null || itemName.equals("")) {
             Logger logger = Logger.getLogger(getClass().getName());
@@ -222,7 +222,7 @@ public class ItemParser {
             return null;
         } else {
             // iterate through base types
-            for (String type : allData) {
+            for (String type : baseTypeDatabase) {
                 String[] splitStr = type.split("\n");
                 for (String base : splitStr) {
                     // if magic item name contains base type
@@ -242,16 +242,20 @@ public class ItemParser {
      * creates class from string, populating it with global item blocks
      * @param itemName itemName to search for
      */
-    private Item createBaseItem(String itemName) {
+    public Item createBaseItem(String itemName) {
         int i = 0;
         // iterate through possible basetype strings
-        for (String str : allData) {
+        for (String str : baseTypeDatabase) {
             if (str.contains(itemName)) {
                 try {
                     String[] arr = baseTypes.get(i).split("\\.");
-                    Class<?> clazz = Class.forName("model.basetype." + arr[0]);
-                    Constructor<?> ctor = clazz.getConstructor(HashMap.class);
-                    return (Item) ctor.newInstance(new Object[] {hashMap});
+                    String className = "model.basetype." + arr[0];
+                    Class myClass = Class.forName(className);
+                    Class[] types = {HashMap.class};
+                    Constructor constructor = myClass.getConstructor(types);
+                    Object[] parameters = {hashMap};
+                    Item item = (Item)constructor.newInstance(parameters);
+                    return item;
                 } catch (Exception e) {
                     Logger logger = Logger.getLogger(getClass().getName());
                     logger.log(Level.SEVERE, "Error creating new Java Object from string.", e);
@@ -261,6 +265,16 @@ public class ItemParser {
             i++;
         }
         // should never return null Item
+        Logger logger = Logger.getLogger(getClass().getName());
+        logger.log(Level.SEVERE, "Cannot find base item in base item database.");
         return null;
+    }
+
+    /**
+     * gets all base type data as string array
+     * @return string array of all base types
+     */
+    public String[] getBaseTypeDatabase() {
+        return baseTypeDatabase;
     }
 }
