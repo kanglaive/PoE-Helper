@@ -53,15 +53,15 @@ public class ItemParserTest {
     @Test
     public void parseStringToBlocks() {
         itemParser = new ItemParser();
-        String sampleCurrency = "Rarity: Currency" + System.getProperty("line.separator") +
-                "Scroll of Wisdom" + System.getProperty("line.separator") +
-                "--------" + System.getProperty("line.separator") +
-                "Stack Size: 15/40" + System.getProperty("line.separator") +
-                "--------" + System.getProperty("line.separator") +
-                "Identifies an item" + System.getProperty("line.separator") +
-                "--------" + System.getProperty("line.separator") +
-                "Right click this item then left click an unidentified item to apply it."
-                + System.getProperty("line.separator") + "Shift click to unstack.";
+        String sampleCurrency = "Rarity: Currency\n" +
+                "Scroll of Wisdom\n" +
+                "--------\n" +
+                "Stack Size: 15/40\n" +
+                "--------\n" +
+                "Identifies an item\n" +
+                "--------\n" +
+                "Right click this item then left click an unidentified item to apply it.\n" +
+                "Shift click to unstack.";
         ArrayList<String[]> itemBlocks = itemParser.parseStringToBlocks(sampleCurrency);
         assertNotNull("Item blocks unable to be parsed by method.", itemBlocks);
         String[] expectedRarity = {"Rarity: Currency","Scroll of Wisdom"};

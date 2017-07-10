@@ -5,8 +5,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/ItemParser.java" afterPath="$PROJECT_DIR$/src/model/ItemParser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/ItemParserTest.java" afterPath="$PROJECT_DIR$/src/model/ItemParserTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/basetype/Currency.java" afterPath="$PROJECT_DIR$/src/model/basetype/Currency.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/basetype/Flask.java" afterPath="$PROJECT_DIR$/src/model/basetype/Flask.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -136,8 +134,8 @@
       <file leaf-file-name="ItemParser.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/model/ItemParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="99" column="26" selection-start-line="99" selection-start-column="26" selection-end-line="99" selection-end-column="26" />
+            <state relative-caret-position="226">
+              <caret line="102" column="39" selection-start-line="102" selection-start-column="39" selection-end-line="102" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -158,8 +156,8 @@
       <file leaf-file-name="ItemParserTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/ItemParserTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="68" column="79" selection-start-line="68" selection-start-column="79" selection-end-line="68" selection-end-column="79" />
+            <state relative-caret-position="282">
+              <caret line="59" column="30" selection-start-line="59" selection-start-column="30" selection-end-line="59" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -498,7 +496,7 @@
       <recent name="E:\Documents\GitHub\PoE-Helper\src\model\basetype\data" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ItemParserJUnitTest">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -985,14 +983,11 @@
       <workItem from="1499484372304" duration="4110000" />
       <workItem from="1499514255431" duration="306000" />
       <workItem from="1499560808729" duration="51281000" />
-      <workItem from="1499666358526" duration="12179000" />
+      <workItem from="1499666358526" duration="12580000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ItemParserJUnitTest - 2017.07.10 at 05h 27m 29s.xml">
-      <configuration name="ItemParserJUnitTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="ItemParserJUnitTest - 2017.07.10 at 05h 29m 38s.xml">
       <configuration name="ItemParserJUnitTest" configurationId="JUnit" />
     </history-entry>
@@ -1020,9 +1015,12 @@
     <history-entry file="ItemParserJUnitTest - 2017.07.10 at 05h 34m 36s.xml">
       <configuration name="ItemParserJUnitTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="ItemParserJUnitTest - 2017.07.10 at 05h 35m 31s.xml">
+      <configuration name="ItemParserJUnitTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="116183000" />
+    <option name="totallyTimeSpent" value="116584000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="0" width="1927" height="1073" extended-state="0" />
@@ -1434,16 +1432,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/ItemParserTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="68" column="79" selection-start-line="68" selection-start-column="79" selection-end-line="68" selection-end-column="79" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/MainController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1768">
@@ -1452,10 +1440,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/ItemParserTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="59" column="30" selection-start-line="59" selection-start-column="30" selection-end-line="59" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/ItemParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="99" column="26" selection-start-line="99" selection-start-column="26" selection-end-line="99" selection-end-column="26" />
+        <state relative-caret-position="226">
+          <caret line="102" column="39" selection-start-line="102" selection-start-column="39" selection-end-line="102" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

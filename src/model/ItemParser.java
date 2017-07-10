@@ -21,7 +21,7 @@ public class ItemParser {
     private ArrayList<String> baseTypes = new ArrayList<>();
     private String[] baseTypeDatabase;
     private HashMap<String, String> hashMap;
-    public static String newLine = System.getProperty("line.separator");
+    public static String newLine = "\n";
     /**
      * item parser constructor with empty item
      */
@@ -98,7 +98,6 @@ public class ItemParser {
         ArrayList<String[]> itemBlocks = new ArrayList<>();
         // iterate through blocks
         for (String block : blockStrings) {
-            // split blocks by line
             String[] blockLines = block.split(newLine);
             // add line to itemLines
             itemBlocks.add(blockLines);
