@@ -16,7 +16,6 @@ import java.util.ArrayList;
  * Created by Kang on 7/7/2017.
  */
 public class ItemParser {
-    private Path currentRelativePath;
     private String path;
     private File[] dataFiles;
     private ArrayList<String> baseTypes = new ArrayList<>();
@@ -27,7 +26,7 @@ public class ItemParser {
      */
     public ItemParser() {
         // get current path
-        currentRelativePath = Paths.get("");
+        Path currentRelativePath = Paths.get("");
         path = currentRelativePath.toAbsolutePath().toString();
         // get directory or basetype txt files
         dataFiles = new File(path + "/src/model/basetype/data").listFiles();
@@ -77,38 +76,34 @@ public class ItemParser {
      * @return initially parsed item
      */
     public Item parseItemString(String itemString) {
-        if (itemString == null) {
-            Logger logger = Logger.getLogger(getClass().getName());
-            logger.log(Level.SEVERE, "Received null string in Item Parser.");
-            return null;
-        } else {
-            // split item into blocks
-            String[] blockStrings = itemString.split("--------");
-            // initiate item as arraylist of block arrs
-            ArrayList<String[]> itemBlocks = new ArrayList<>();
-            // iterate through blocks
-            for (String block : blockStrings) {
-                // split blocks by line
-                String[] blockLines = block.split("\n");
-                // add line to itemLines
-                itemBlocks.add(blockLines);
-            }
-            return parseItemBlocks(itemBlocks);
-        }
-    }
-
-    /**
-     * parses item and populates into item
-     * @return Item now parsed item
-     */
-    public Item parseItemBlocks(ArrayList<String[]> itemBlocks) {
+        ArrayList<String[]> itemBlocks = parseStringToBlocks(itemString);
         hashMap = new HashMap<>();
         // iterate through item's blocks
         for (String[] block : itemBlocks) {
             parseBlock(block);
         }
-        String itemName = hashMap.get("ItemName");
-        return createBaseItem(itemName);
+        String baseType = hashMap.get("BaseType");
+        String rarity = hashMap.get("Rarity");
+        if (rarity.equals("Currency") || rarity.equals("Gem")) {
+            return createBaseItem(rarity);
+        } else {
+            return createBaseItem(baseType);
+        }
+    }
+
+    public ArrayList<String[]> parseStringToBlocks(String itemString) {
+        // split item into blocks
+        String[] blockStrings = itemString.split("--------");
+        // initiate item as arraylist of block arrs
+        ArrayList<String[]> itemBlocks = new ArrayList<>();
+        // iterate through blocks
+        for (String block : blockStrings) {
+            // split blocks by line
+            String[] blockLines = block.split("\n");
+            // add line to itemLines
+            itemBlocks.add(blockLines);
+        }
+        return itemBlocks;
     }
 
     /**
@@ -124,7 +119,11 @@ public class ItemParser {
             case "Rarity:":
                 String[] rarityData = parseRarityBlock(block);
                 hashMap.put("Rarity", rarityData[0]);
-                hashMap.put("ItemName", rarityData[1]);
+                if (rarityData[0].equals("Currency") || rarityData[0].equals("Gem")) {
+                    hashMap.put("itemName", rarityData[1]);
+                } else {
+                    hashMap.put("BaseType", rarityData[1]);
+                }
             case "Requirements:":
                 parseRequirementsBlock(block);
             case "Stack":
@@ -144,7 +143,6 @@ public class ItemParser {
     public String[] parseRarityBlock(String[] block) {
         String[] results = new String[2];
         String firstLine = block[0];
-        String itemName = null;
         String[] firstLineSplit = firstLine.split(" ");
         results[0] = firstLineSplit[1];
         // find item name

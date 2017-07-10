@@ -64,6 +64,10 @@ public class Main extends Application {
         }
     }
 
+    public String[] getAllFilesInDir() {
+        return null;
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
