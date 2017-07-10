@@ -1,0 +1,27 @@
+Rarity: Unique
+Dusktoe
+Ironscale Boots
+--------
+Armour: 51 (augmented)
+Evasion Rating: 51 (augmented)
+--------
+Requirements:
+Level: 18
+Str: 19
+Dex: 19
+--------
+Sockets: R-B 
+--------
+Item Level: 35
+--------
+49% increased Armour and Evasion
++27 to maximum Life
+15% increased Movement Speed
+50% increased Stun and Block Recovery
+20% reduced Light Radius
++50% to Chaos Resistance while using a Flask
+Adds 20 to 29 Chaos Damage to Spells and Attacks while using a Flask
+--------
+"A lick of shadow may ease 
+the petty frictions of one's life."
+- Inquisitor Maligaro

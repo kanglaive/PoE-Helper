@@ -1,0 +1,28 @@
+Rarity: Rare
+Empyrean Crusher
+Dread Maul
+--------
+Two Handed Mace
+Physical Damage: 165-251 (augmented)
+Elemental Damage: 39-65 (augmented)
+Critical Strike Chance: 6.45% (augmented)
+Attacks per Second: 1.25
+Weapon Range: 11
+--------
+Requirements:
+Level: 54
+Str: 173
+Int: 22
+--------
+Sockets: R-R 
+--------
+Item Level: 55
+--------
+30% increased Stun Duration on Enemies
+--------
+90% increased Physical Damage
+Adds 21 to 43 Physical Damage
+Adds 39 to 65 Fire Damage
+29% increased Critical Strike Chance
++5 Life gained for each Enemy hit by Attacks
++21 to Accuracy Rating

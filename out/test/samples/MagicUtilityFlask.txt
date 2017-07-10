@@ -1,0 +1,19 @@
+Rarity: Magic
+Stibnite Flask of Craving
+--------
+Quality: +17% (augmented)
+Lasts 5.80 (augmented) Seconds
+Consumes 10 of 30 Charges on use
+Currently has 30 Charges
+100% increased Evasion Rating
+--------
+Requirements:
+Level: 14
+--------
+Item Level: 52
+--------
+Creates a Smoke Cloud on Use
+--------
+0.4% of Physical Attack Damage Leeched as Mana during Flask effect
+--------
+Right click to drink. Can only hold charges while in belt. Refills as you kill monsters.

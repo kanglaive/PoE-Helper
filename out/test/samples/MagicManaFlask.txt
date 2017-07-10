@@ -1,0 +1,18 @@
+Rarity: Magic
+Panicked Hallowed Mana Flask of Heat
+--------
+Recovers 218 (augmented) Mana over 7.00 Seconds
+Consumes 4 of 20 Charges on use
+Currently has 20 Charges
+--------
+Requirements:
+Level: 42
+--------
+Item Level: 44
+--------
+25% reduced Amount Recovered
+Instant Recovery when on Low Life
+Immunity to Freeze and Chill during Flask effect
+Removes Freeze and Chill on use
+--------
+Right click to drink. Can only hold charges while in belt. Refills as you kill monsters.

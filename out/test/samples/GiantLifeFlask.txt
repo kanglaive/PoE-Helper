@@ -1,0 +1,13 @@
+Rarity: Normal
+Giant Life Flask
+--------
+Recovers 830 Life over 8.00 Seconds
+Consumes 10 of 30 Charges on use
+Currently has 0 Charges
+--------
+Requirements:
+Level: 24
+--------
+Item Level: 60
+--------
+Right click to drink. Can only hold charges while in belt. Refills as you kill monsters.

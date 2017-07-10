@@ -1,0 +1,6 @@
+Rarity: Normal
+Chain Belt
+--------
+Item Level: 60
+--------
++20 to maximum Energy Shield

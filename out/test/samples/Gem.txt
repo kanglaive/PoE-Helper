@@ -1,0 +1,21 @@
+Rarity: Gem
+Purity of Elements
+--------
+Aura, Spell, AoE
+Level: 11
+Mana Reserved: 35%
+Cooldown Time: 1.20 sec
+Cast Time: 1.20 sec
+Experience: 427,547/1,638,338
+--------
+Requirements:
+Level: 52
+Str: 51
+Int: 74
+--------
+Casts an aura that grants elemental resistances to you and your allies.
+--------
+27% increased Area of Effect
+You and nearby allies gain +20% to all Elemental Resistances
+--------
+Place into an item socket of the right colour to gain this skill. Right click to remove from a socket.

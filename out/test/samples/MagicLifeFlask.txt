@@ -1,0 +1,16 @@
+Rarity: Magic
+Chemist's Hallowed Life Flask of Fending
+--------
+Recovers 1990 Life over 8.00 Seconds
+Consumes 7 (augmented) of 30 Charges on use
+Currently has 30 Charges
+--------
+Requirements:
+Level: 42
+--------
+Item Level: 48
+--------
+24% reduced Charges used
+Adds Knockback to Melee Attacks during Flask effect
+--------
+Right click to drink. Can only hold charges while in belt. Refills as you kill monsters.

@@ -1,0 +1,6 @@
+Rarity: Normal
+Rustic Sash
+--------
+Item Level: 60
+--------
+15% increased Physical Damage
